@@ -1,0 +1,638 @@
+<apex:page id="thePage"  controller="TrainingScheduleFormController"  standardStylesheets="true" cache="false" showHeader="false" docType="html-5.0" sidebar="false">
+   <html>
+      <head>
+         
+         <apex:stylesheet value="{!URLFOR($Resource.Community2, 'Community2/css/style.css')}" />
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+         <apex:includeScript value="{!URLFOR($Resource.Community2, 'Community2/js/jquery-1.10.2.min.js')}" />
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.core.css" />
+         <apex:stylesheet value="{!URLFOR($Resource.Alertify, 'css/alertify.css')}" />
+         <apex:stylesheet value="{!URLFOR($Resource.Alertify, 'css/themes/bootstrap.css')}" />
+         <apex:includeScript value="{!URLFOR($Resource.Alertify, '/alertify.min.js')}" />
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+         <style>
+         .alert-danger,
+            .alert-error {
+            color: #b94a48;
+            background-color: #f2dede;
+            border-color: #eed3d7;
+            }
+            
+            #errorMessage {
+            font-size: 14px
+            }
+            
+            a.link-02,
+            input[type=text],
+            input[type=password],
+            input[type=date],
+            textarea,
+            select {
+            border: 1px solid #4a3c6c;
+            margin-bottom: 25px;
+            padding: 17px;
+            background: #f5f5f5;
+            }
+            
+            body {
+       //     background: #8ad2ed;
+            margin : 0px;
+            background-position : center 0;
+            background-size : cover;
+            background-repeat : no-repeat;
+            overflow :hidden; 
+            overflow: scroll;
+            }
+            
+           form {
+                
+                margin-top: 2em;
+            }
+            
+            .content1 {
+            width: 85%;
+            margin: auto;
+            padding: 0%;
+            margin-top: 0px;
+            
+            }
+            <!--
+               .content1 {
+                   width: 60%;
+                   margin: auto;
+                   border: 1px solid #ccc;
+                   padding: 3%;
+                   margin-top: 10%;
+                   border-radius: 14px;
+                   background: url(https://pre00.deviantart.net/03e0/th/pre/i/2012/089/7/3/gray_website_background_by_maruron-d4ugudv.jpg) 0px 0px repeat;*/
+               }
+               
+               .input{
+                   font-size: 1em;
+                   background: transparent;
+                   color: #fff;
+                   padding: 0.5em 1em;
+                   border: 0;
+                   width: 100%;
+                   border-bottom: 1px solid #dcdcdc;
+                   -webkit-appearance: none;
+                   outline: none;
+                   margin-bottom: 15px;
+                   box-sizing: border-box;
+               }
+               input:focus,
+               select:focus,
+               option:focus,
+               textarea:focus,
+               button:focus {
+                   outline: none;
+               }
+               input:focus::-webkit-input-placeholder {
+                   font-size: 0.75em;
+                   position: relative;
+                   top: -10px; 
+                   transition: 0.2s ease-out;
+               }
+               ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                 color: #fff;
+               }
+               ::-moz-placeholder { /* Firefox 19+ */
+                 color: #fff;
+               }
+               :-ms-input-placeholder { /* IE 10+ */
+                 color: #fff;
+               }
+               :-moz-placeholder { /* Firefox 18- */
+                 color: #fff;
+               }
+               -->
+            .input {
+           
+            background: transparent;
+            color: #fff;  
+            border: 0;
+            width: 100%;
+            -webkit-appearance: none;
+            outline: none;
+            margin-bottom: 15px;
+            box-sizing: border-box; 
+            }
+            
+            input:focus,
+            select:focus,
+            option:focus,
+            textarea:focus,
+            button:focus {
+            outline: none;
+            }
+            
+            input:focus::-webkit-input-placeholder {
+            font-size: 0.75em;
+            position: relative;
+            top: -10px;
+            transition: 0.2s ease-out;
+            }
+            
+            ::-webkit-input-placeholder {
+            /* Chrome/Opera/Safari */
+            color: #fff;
+            }
+            
+            ::-moz-placeholder {
+            /* Firefox 19+ */
+            color: #fff;
+            }
+            
+            :-ms-input-placeholder {
+            /* IE 10+ */
+            color: #fff;
+            }
+            
+            :-moz-placeholder {
+            /* Firefox 18- */
+            color: #fff;
+            }
+            
+            select {
+            border-radius: 0px;
+            border: 1.3px solid #ccc;
+            margin-bottom: 24px;
+            margin-left: 3.5em;
+            }
+            
+            option {
+            color: #000;
+            }
+            
+
+            input[type=submit] {
+            border-radius: 11px;
+            background: #f3744e;
+            font-size: 20px;
+            height: 48px;;
+            width: 32%;
+            margin-top: 3em;
+            margin-bottom: 2em;
+            
+            }
+           
+            input[type="date"]:not(.has-value):before{
+            color: #fff;
+            content: attr(placeholder);
+            }
+            
+            div .col-xs-12 {
+            margin-left: 25px !important;
+            padding-left: 25px;
+            }
+            
+            input[type=checkbox] {
+            position: relative;
+            margin-left: 0;
+            margin-right: 10px;
+            }
+            }
+            
+            .output-width{
+            width:100% !important;
+            }
+            
+            .width-95{
+            width:95%;
+            }
+            
+            @media (min-width: 768px){
+            .form-inline .form-group {
+            display: inline-block;
+            margin-bottom: 0;
+            vertical-align: middle;
+            margin-left: 10px;
+            }
+            
+            .ph1{
+            width:25% !important;
+            }
+            
+            .ph2{
+            width:15% !important;
+            }
+            .form-inline .form-control {  
+            width: 190px;
+            height: 35px;
+            border-radius: 0px;
+            margin-bottom: 1.6em; 
+            border: 1.3px solid #ccc;
+            background: #f5f5f5;
+            margin-left: 3em;
+            }  
+            
+            .form-inline .checkbox label, .form-inline .radio label {
+            padding-top: 2em;
+            }
+            
+            .form-inline .control-label {
+            font-weight: normal;
+            font-size: 18px;
+            color: #777;
+            }
+            
+            }
+            
+            label {
+            margin-bottom: 5px;
+            color: #777;
+            font-size: 16px;
+            font-weight: normal;
+            padding-left: 5px;
+            }
+            
+            .errorClass {
+            color: red !important;
+            font-size: 12px !important;
+            }
+            
+            .form-control {
+                height: 35px;
+                border: 1px solid;
+                width: 176%;
+                border-radius: 0px;
+                background: #f5f5f5;
+            }
+            
+            #errorMessage p.en {
+            width: 70%;
+            }
+            
+            td {
+            width: 330px;
+            height: 29px;
+            }
+            
+            .content1 {
+            padding: 2.5%;
+            }
+            
+            .container {
+            width: 1100px; 
+            }
+            
+            p {
+            margin: 0 0 0px;
+            }
+            
+            .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+            content: none ;
+            }
+            
+            .panel {
+            margin-bottom: 0px;
+            }
+            
+            .overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+            bottom: 0;
+            cursor: default;
+            left: 0;
+            opacity: 0;
+            position: fixed;
+            right: 0;
+            top: 0;
+            visibility: hidden;
+            z-index: 3;
+            -webkit-transition: opacity .5s;
+            -moz-transition: opacity .5s;
+            -ms-transition: opacity .5s;
+            -o-transition: opacity .5s;
+            transition: opacity .5s;
+            }
+            
+            .overlay:target {
+            visibility: visible;
+            opacity: .9;
+            }
+            
+            .popup {
+            background-color: #fff;
+            border: 3px solid #fff;
+            display: inline-block;
+            left: 51.5%;
+            opacity: 0;
+            padding: 15px;
+            position: fixed;
+            text-align: justify;
+            top: 25% ;
+            visibility: hidden;
+            z-index: 10;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            -webkit-border-radius: 5 px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+            -moz-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+            -ms-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+            -o-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+            -webkit-transition: opacity .5s, top .5s;
+            -moz-transition: opacity .5s, top .5s;
+            -ms-transition: opacity .5s, top .5s;
+            -o-transition: opacity .5s, top .5s;
+            transition: opacity .5s, top .5s;
+            }
+            
+            #join_form ,#join_form1,#join_form2,#join_form3{
+            pointer-events: none;
+            -ms-pointer-events: none;
+            -ms-cursor :none;
+            
+            }
+            .overlay:target+.popup {
+            top: 35%;
+            opacity: 1;
+            visibility: visible;
+            }
+            
+            .container {
+            width: 1100px; 
+            }
+            
+            #errorMessage p.en {
+            width: 88%;
+            }
+            
+            #errorMessage {
+            pointer-events: auto;
+            }
+            
+            p {
+            margin: 0 0 0px;
+            }
+            .btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+            
+            }
+            .alertify .ajs-header {
+            background: lightblue;
+            pointer-events:auto;
+            }
+            
+            .alertify .ajs-footer .ajs-buttons.ajs-primary {
+            pointer-events:auto;
+            }
+            
+            .alertify .ajs-dialog {
+            position: relative;
+            margin: 11% auto;
+            }
+          /*  
+            body{
+            pointer-events: none ;
+            }
+           */ 
+            .datePicker  .alert{
+            pointer-events:auto;
+            }
+            
+            .dateFormat {
+            display:none;
+            margin: 8px 44px 0px 0;
+            }
+            
+            
+            .col-xs-12 {
+            margin-left: 25px !important;
+            }
+            
+            div .col-xs-12 {
+                margin-left: 25px !important;
+                padding-left: 25px;
+            }
+            
+            .panel {
+            border-radius: 10px;
+            margin-right: 3em;
+            margin-left: 2em;
+            }
+            
+            .panel-info>.panel-heading {
+                color: #31708f;
+                background-color: #d9edf7;
+                border-color: #bce8f1;
+                padding: 2em;
+            }
+         </style>
+      
+      <script>
+         function inputLimiter(e,allow) {
+                var AllowableCharacters = '' ;                                
+                    
+                if (allow == 'Letters'){ AllowableCharacters =' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';}
+                if (allow == 'Numbers'){ AllowableCharacters ='1234567890';}
+                if (allow == 'NameCharacters'){ AllowableCharacters =' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-.\'';}
+                if (allow == 'NameCharactersAndNumbers'){ AllowableCharacters ='1234567890 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-\'';}
+                if (allow == 'Currency'){ AllowableCharacters ='1234567890.';}
+                if(allow == 'date'){AllowableCharacters ='1234567890';}
+                var k = document.all? parseInt(e.keyCode): parseInt(e.which);
+                // alert(k) ;
+                if (k!=13 && k!=8 && k!=0 && k!= 9 && k!= 37 && k!= 39 ){
+                    
+                     if(allow == date && k== 47){
+                       return true ;
+                     }
+                    
+                    if (( e.ctrlKey == false) && (e.altKey == false)) {
+                          if(AllowableCharacters.indexOf(String.fromCharCode(k)) != -1){
+                             return true ;
+                          }else{
+                            return false ;
+                          }
+                    } else {
+                      
+                    }
+                } else {
+                    return true;
+                }
+            }
+            
+             function checkDatePins(datVal){
+          
+                if(datVal.length == 2 && parseInt(datVal) > 12){
+                    document.getElementById("{!$Component.thePage.frm.dob}").value = datVal ; 
+                    return false ;
+                }
+                
+                if(datVal.length == 5 && parseInt(datVal.substring(3,5)) > 31){
+                    document.getElementById("{!$Component.thePage.frm.dob}").value = datVal ;
+                   
+                    return false ;
+                }
+                 if(datVal.length == 2 ){
+                       if(!(isNaN(datVal))){
+                        document.getElementById("{!$Component.thePage.frm.dob}").value = datVal+"/" ;
+                        }
+                }
+                 if(datVal.length == 5 ){
+                       if(!(isNaN(datVal.substring(3,5)))){
+                            document.getElementById("{!$Component.thePage.frm.dob}").value = datVal+"/" ;
+                        }
+                }
+               
+              } 
+            
+      </script>
+      
+   </head>
+      <body Style="background-image:url('{!$Resource.img}')">
+         <!-- section -->
+         <section class="register">
+            <apex:outputPanel id="containerPanel">
+               <div class="alert alert-danger alert-dismissible clearfix" id="errorMessage" style="padding-left:20px;">
+                  <p class="en">
+                     <strong>You cannot proceed unless you fix the below issues</strong>
+                     <apex:repeat value="{!errorMessages}" var="item">
+                        <br/> &nbsp;&nbsp;&nbsp; - {!item}
+                     </apex:repeat>
+                  </p>
+                  <a href="" style="color:#b94a48;" class="close2"> <i style="font-size:24px;margin-top:10px;padding-right:30px;" class="fa fa-times-circle"></i></a>
+               </div>
+               <apex:panelgroup rendered="{!errorMessages.size > 0}">
+                  <script>
+                     $('#errorMessage').fadeIn('fast');
+                     $('.close2').click(function() {
+                         $('#errorMessage').fadeOut('fast');
+                     });
+                     //.delay(5000).fadeOut('fast');
+                  </script>
+               </apex:panelgroup>
+               <div class="container">
+                  <div class="row">
+                     <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
+                        <div class="content1">
+                           <div class="panel panel-info" >
+                           <div class = "header">
+                                 <center>
+                                    <apex:image url="{!$Resource.MCRLogo_TS_Form}" style="align:; width:360px; height:160px; margin-left: 0px;"/>
+                                 </center>
+                              </div>
+                              <div class="panel-heading">
+                                 <h3>Welcome to the Flyers!</h3>
+                                 <br/>
+                                 <apex:outputPanel rendered="{!!contactCreated}">
+                                    <p style="font-size:16px;"> 
+                                       You're getting closer! Tell us when you can come to Scooter School.<br/>
+                                       Please select the session that fits your schedule from the list below. 
+                                    </p>
+                                 </apex:outputPanel>
+                              </div>
+                              <apex:outputPanel rendered="{!NOT(contactCreated)}">
+                                 <div class="panel-body">
+                                    <apex:form id="frm" styleClass="form" >
+                                       <table>
+                                          <tr>
+                                             <td>
+                                                <label class="col-sm-12 col-xs-12 col-lg-12 control-label" for="addressfor"> Enter Email <span style="color:red;">*</span></label>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td style="height: 32px;">
+                                                <apex:inputText required="true" value="{!studentEmail}" maxlength="80" style="width:176%; margin-left: 50px; border-radius: 0px;" />
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>
+                                                <label class="col-sm-12 col-xs-12 col-lg-12 control-label" for="addressfor">Select Date of Birth <span style="color:red;">*</span></label>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>
+                                                <apex:inputText value="{!studDateOfBirth}" html-placeholder="mm/dd/yyyy" required="true" style="width:176%; margin-left: 50px; border-radius: 0px;" maxlength="10" styleClass="form-control" id="dob"  onkeyup="checkDatePins(this.value)"  onkeydown="return inputLimiter(event, 'date')"/>
+                                                <br />
+                                             </td>
+                                          </tr>
+                                        <!--  <tr>
+                                             <td>
+                                                <label class="col-sm-12 col-xs-12 col-lg-12 control-label" for="addressfor" style="padding-left: 25px;">Select your Estimated Jacket Size <span style="color:red;">*</span></label>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>
+                                                <apex:inputField id="jacksize" required="false" value="{!conObj.Estimated_Jacket_Size__c}"  styleClass="form-control" style="height: 35px;"/>
+                                             </td>
+                                          </tr> 
+                                          -->
+                                          <tr>
+                                             <td>
+                                                <label class="col-sm-12 col-xs-12 col-lg-12 control-label" for="addressfor" style="padding-left: 25px;">Select Scooter School Session <span style="color:red;">*</span></label>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>
+                                                <apex:selectList id="opt1" value="{!selecteDate}" size="1" styleClass="form-control" style="height: 35px;">
+                                                   <apex:selectOptions value="{!schoolActiveDateList}"/>
+                                                </apex:selectList>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                          <center>
+                                            <td style="height:50px;">
+                                                <apex:commandButton action="{!showPopup}"  value="Submit" styleclass="btn btn-warning" id="btn"  style="width:46%; margin-left: 15.5em; background: #f3744e;color: #fff;font-size: 18px; height: 56px;" >
+                                                </apex:commandButton>
+                                             </td>
+                                          </center>
+                                          </tr>
+                                       </table>
+                                       <!------------- Confiration Pop up for confirming info before sending the form --------------->   
+                                       <apex:outputPanel id="popuppanel" style="font-size:85%;">
+                                          <div id="close"></div>
+                                          <a href="#x" class="overlay" id="join_form"></a>
+                                          <div class="popup" style="height:30%; width:34%; text-align: left;background-color:#FFFAEF;margin-left:auto; margin-right:auto;margin-top:auto;margin-bottom:auto;">
+                                             <span style="font-size:16px; margin: 1em;" > You have selected the following date for scooter school: </span> 
+                                             <table style="margin-top:10px;">
+                                                <tr>
+                                                   <td style="padding-left:1em; font-weight:bold; font-size:16px;">
+                                                      <apex:outputText value="{0, date, MM'/'dd'/'yyyy}">
+                                                         <apex:param value="{!selectedDateOnly}" />
+                                                      </apex:outputText>
+                                                   </td>
+                                                </tr>
+                                             </table>
+                                             <p style="font-size:14px; padding-left:1.3em; margin-top:15px;">If correct click <b>Submit</b>, Or click <b>Cancel</b> </p>
+                                             <center style="margin-left: 10em;">
+                                                 <apex:commandButton action="{!submit}" value="Submit"   styleclass="btn btn-warning" style="padding:; margin-top: 20px; margin-bottom: 8px; background: #f3744e;;color: #fff;font-size: 14px;"   />
+                                                 <apex:commandButton value="Cancel" action="{!closePopup}" styleclass="btn btn-warning" style="padding:; margin-top: 20px; margin-bottom: 8px; background: #f3744e;;color: #fff;font-size: 14px;" onclick="location.replace('#close');" />
+                                             </center>
+                                             
+                                        </div>
+                                       </apex:outputPanel>
+                                       <apex:outputPanel layout="block"  rendered="{!displayPopUp}">
+                                          <script>
+                                             location.replace('#join_form');
+                                          </script>
+                                       </apex:outputPanel>
+                                    </apex:form>
+                                 </div>
+                              </apex:outputPanel>
+                              <apex:outputPanel rendered="{!contactCreated}" style="margin-left:20%;margin-top:5%;">
+                                 <b>
+                                    <p style="font-size:18px;margin-left: 11%;">Thank you! Your request has been submitted.</p>
+                                 </b>
+                                 <br/><br/>
+                              </apex:outputPanel>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </apex:outputPanel>
+         </section>
+      </body>
+   </html>
+</apex:page>

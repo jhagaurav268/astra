@@ -1,0 +1,30 @@
+<apex:page controller="GeozonePresenceUploadController" title="Convert Rider Geozones " lightningStylesheets="true"  >
+    <apex:slds />
+    
+     
+        
+    <apex:form style="background-color:white" >  
+     <apex:actionStatus id="status">
+    <apex:facet name="start">
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+        &nbsp;
+    </div>
+    <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+        <div style="display: inline-block; padding: 2px; background-color: #fff; width: 125px;">
+            <img src="/img/loading.gif" style="float: left; margin: 8px;" />
+            <span style="display: inline-block; padding: 10px 0px;">Please Wait...</span>
+        </div>
+    </div>
+    </apex:facet>
+    </apex:actionStatus>
+        <apex:pageBlock id="uploadPanel"> 
+            <div style="margin: 5px 5px 10px 5px;">
+                <p style="font-weight:400; padding: 0px 5px 5px 0px;">CSV File</p><p><apex:inputFile styleClass="slds-file-selector__input" value="{!csvInputFile}" accept="csv" contentType="text/csv" /></p>
+            </div>
+            <apex:pageMessages />
+        </apex:pageBlock>  
+        <div style="margin: 0px 5px 10px 5px; float:right" >
+            <apex:commandButton styleClass="slds-vf-button_brand" value="Generate CSV" status="status" action="{!processCSV}"/>
+        </div>
+    </apex:form>        
+</apex:page>

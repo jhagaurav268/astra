@@ -1,0 +1,193 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader"
+                access="global" controller="assignScooterController">
+    <aura:html tag="style">
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }
+        
+        .slds-modal__content{
+            overflow-y:hidden !important;
+            height:unset !important;
+            max-height:unset !important;
+        }
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-modal__header{
+        background: #337AB7 !important; color: #fff;
+        }
+        
+        .slds-modal__container {
+        width: 800px;
+        max-width: unset;
+        }
+        .slds-modal__footer {
+        display: block !important;
+        }
+    </aura:html>
+    
+    <aura:attribute name="objWrapper" type="object" />
+    <aura:attribute name="mapReasonOptions" type="Map" />
+    <aura:attribute name="mapReasonDetailOptions" type="Map" />
+    <aura:attribute name="closedReason" type="string" />
+    <aura:attribute name="closedReasonDetail" type="string" />
+    <aura:attribute name="contactId" type="string" />
+    <aura:attribute name="contactName" type="string" />
+    <aura:attribute name="comments" type="string" />
+    <aura:attribute name="contactFilter" type="string" />
+    <aura:attribute name="showSpinner" type="boolean" />
+    <aura:attribute name="showCloseBtn" type="boolean" />
+    <aura:attribute name="showConfirm" type="boolean" />
+    <aura:attribute name="showReassignConfirm" type="boolean" />
+    <aura:attribute name="showSubmitConfirm" type="boolean" />
+    <aura:attribute name="documentsUploaded" type="boolean" />
+    <aura:attribute name="showDetails" type="boolean" />
+    <aura:attribute name="picklistValues" type="List" />
+    <aura:attribute name="paymentDurationValues" type="List" />
+    <aura:attribute name="selectedValue" type="String" />
+    <aura:attribute name="paymentValue" type="String" />
+    <aura:attribute name="scooter" type="Scooter__c" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.paymentType}" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:if isTrue="{!v.showSpinner}">
+        <div id="divLoading">
+            <div class="demo-only demo-only demo-only_viewport demo--inverse" style="height:6rem">
+                <div class="slds-spinner_container slds-is-fixed">
+                    <div role="status" class="slds-spinner slds-spinner_medium">
+                        <span class="slds-assistive-text">Loading</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.showReassignConfirm}">
+        
+        <div class="modal-header slds-modal__header slds-size_1-of-1">
+            <span style="font-size: 14pt;">Assign Scooter </span>
+        </div>
+        
+        <form class="slds-form–stacked">
+            <br />
+            <div style="height:225px;">
+                
+                <center>
+                    <br />
+                    <p style="">
+                        Scooter is currently assigned to <b>{!v.objWrapper.objAssignmnt.Contact__r.Name}.</b><br />
+                        Do you want to deactivate current assignment({!v.objWrapper.objAssignmnt.Contact__r.Name}) and
+                        re-assign Scooter?
+                    </p>
+                    <br />
+                </center>
+            </div>
+            
+            
+        </form>
+        
+        <footer>
+            
+            <div class="modal-footer slds-modal__footer slds-size_1-of-1" style="display:block">
+                <center>
+                    <button class="slds-button slds-button_neutral" onclick="{!c.hideReassignConfirm}">No</button>
+                    <button class="slds-button slds-button_brand" onclick="{!c.showDetails}">Yes</button>
+                </center>
+                
+            </div>
+        </footer>
+        
+    </aura:if>
+    
+    <aura:if isTrue="{!v.showDetails}">
+        
+        <div class="modal-header slds-modal__header slds-size_1-of-1">
+            <span style="font-size: 14pt;">Assign Scooter </span>
+        </div>
+        
+        <form class="slds-form--stacked" style="height: 170px">
+            <br />
+            <div class="slds-grid slds-wrap">
+                
+                <div class="slds-col slds-size--1-of-2 slds-p-around--small">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <c.lookupCmp objectAPIName="Contact" returnFields="['Name']" queryFields="['Name']"
+                                         selectedId="{!v.contactId}" showAddNew="false" label="Contact"
+                                         filter="{!v.contactFilter}" selectedName="{!v.contactName}" />
+                        </div>
+                    </div>                    
+                </div>
+                <div class="slds-col slds-size--1-of-2 slds-p-around--small">
+                	<div class="slds-form-element">
+                        <div aura:id="paymentDurationField" class="{! (v.scooter.Type__c == 'Sold' || v.scooter.Type__c == null) ? 'slds-hide' : '' }">
+                            <lightning:select aura:id="InputPaymentDuration" label="Select Payment Duration"
+                                              onchange="{!c.onPaymentChange}">
+                                <aura:iteration items="{!v.paymentDurationValues}" var="option">
+                                    <option class="optionClass" value="{!option.value}">{!option.label}</option>
+                                </aura:iteration>
+                            </lightning:select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <br />
+        </form>
+        
+        <footer>
+            
+            <div class="modal-footer slds-modal__footer slds-size_1-of-1" style="display:block">
+                <center>
+                    <button class="slds-button slds-button_neutral" onclick="{!c.hideDetails}">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick="{!c.showSubmitConfirmation}">Submit</button>
+                </center>
+                
+            </div>
+        </footer>
+        
+    </aura:if>
+    
+    
+    <aura:if isTrue="{!v.showSubmitConfirm}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                 aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick="{!c.hideSubmitConfirmation}">
+                        X
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate"> Confirm to Assign Scooter</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1"
+                     style="max-height:130px !important;">
+                    
+                    <center>
+                        <p>
+                            
+                            Are you sure?
+                        </p>
+                    </center>
+                    <br />
+                    <footer class="slds-modal__footer confirmation" style="display:block !important;">
+                        <center>
+                            <button class="slds-button slds-button_brand "
+                                    onclick="{!c.hideSubmitConfirmation}">No</button>
+                            <button class="slds-button slds-button_neutral" onclick="{!c.processAssign}">Yes</button>
+                        </center>
+                    </footer>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    
+    
+</aura:component>

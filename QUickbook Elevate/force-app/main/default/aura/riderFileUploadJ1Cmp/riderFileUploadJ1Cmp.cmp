@@ -1,0 +1,460 @@
+<aura:component implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global"
+                controller="riderFileUploadJ1Controller">
+    <aura:html tag="style">
+        .divMain{
+        padding-left:10%;
+        padding-right:10%;
+        }
+        
+        .tblFiles{
+        width:75%;
+        }
+        .tabCss{
+        padding:20px;
+        }
+        
+        @media only screen and (max-width: 600px) {
+        .divMain{
+        padding-left:1%;
+        padding-right:1%;
+        }
+        
+        .tblFiles{
+        width:100%;
+        }
+        
+        .tabCss{
+        padding:5px;
+        }
+        }
+        
+        .IOS{
+        padding-top:20px !important;
+        padding-left:25px !important;
+        padding-right:25px !important;
+        }
+        
+        /* .forceMobileOverlay{
+        padding-left:10px !important;
+        padding-right:10px !important;
+        }*/
+        
+        @media only screen and (min-width: 600px) {
+        .divMain{
+        padding-left:1%;
+        padding-right:1%;
+        }
+        
+        .tblFiles{
+        width:100%;
+        }
+        .tabCss{
+        padding:5px;
+        }
+        }
+        
+        @media only screen and (min-width: 768px) {
+        .divMain{
+        padding-left:2%;
+        padding-right:2%;
+        }
+        
+        .tblFiles{
+        width:100%;
+        }
+        .tabCss{
+        padding:6px;
+        }
+        }
+        
+        @media only screen and (min-width: 1200px) {
+        .divMain{
+        padding-left:4%;
+        padding-right:4%;
+        }
+        
+        .tblFiles{
+        width:90%;
+        }
+        .tabCss{
+        padding:15px;
+        }
+        }
+        
+        @media only screen and (min-width: 1500px) {
+        .divMain{
+        padding-left:6%;
+        padding-right:6%;
+        }
+        
+        .tblFiles{
+        width:80%;
+        }
+        .tabCss{
+        padding:20px;
+        }
+        }
+        
+        @media only screen and (min-width: 2000px) {
+        .divMain{
+        padding-left:8%;
+        padding-right:8%;
+        }
+        
+        .tblFiles{
+        width:70%;
+        }
+        .tabCss{
+        padding:22px;
+        }
+        }
+        
+    </aura:html>
+    
+    <aura:attribute name="recordId" type="string"/>
+    <aura:attribute name="tempRecId" type="string"/>
+    <aura:attribute name="objWrapper" type="object"/>
+    <aura:attribute name="DOB" type="date"/>
+    <aura:attribute name="email" type="date"/>
+    <aura:attribute name="file1Name" type="string"/>
+    <aura:attribute name="file1Id" type="string"/>
+    <aura:attribute name="file2Name" type="string"/>
+    <aura:attribute name="file2Id" type="string"/>
+    <aura:attribute name="file3Name" type="string"/>
+    <aura:attribute name="file3Id" type="string"/>
+    <aura:attribute name="file4Name" type="string"/>
+    <aura:attribute name="file4Id" type="string"/>
+    <aura:attribute name="device" type="string"/>
+    
+    <aura:attribute name="fromSignupPage" type="boolean"/>
+    <aura:attribute name="showUpload" type="boolean"/>
+    <aura:attribute name="showMain" type="boolean"/>
+    <aura:attribute name="showSpinner" type="boolean"/>
+    <aura:attribute name="showTabs" type="boolean" default="true"/>
+    <aura:attribute name="showSummary" type="boolean"/>
+    <aura:attribute name="showCancelUploadConfirm" type="boolean"/>
+    <aura:attribute name="showUploadConfirm" type="boolean"/>
+    
+    <aura:attribute name="fileTypes" type="List" default="['.txt', '.pdf', '.png', '.jpg', '.jpeg', '.ppt', '.pptx', '.docx', '.csv', '.xls','.xlsx']"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class="divMain">
+        <div style="text-align:center;padding-bottom:10px;">
+            <img src="{!$Resource.BransonLogo}" style="width:30%;"/>
+        </div>
+        
+        <aura:if isTrue="{!v.showTabs}">
+            <lightning:tabset variant="scoped" aura:id="tabs">
+                <lightning:tab label="Instructions" id="instruction">
+                    <div>
+                        <br/>
+                        <b>
+                            Upload Paystub from Current US employer or Employment agreement letter as acceptable proof of employment.
+                        </b>
+                        <br/><br/>
+                         
+                        
+                    </div>
+                    <div style="padding-top: 40px;">
+                        <button class="slds-button slds-button_brand" onclick="{!c.showUploadTab}" disabled="{!v.showSpinner}">Upload Files</button>
+                    </div>
+                    
+                    
+                </lightning:tab>
+                <lightning:tab label="Upload Files" id="uploads" class="tabCss">
+                    
+                    <aura:if isTrue="{!v.showMain}">
+                        <div id="divMain" aura:id="divMain" html-autocomplete="off"  style="padding-left:15px;padding-right:15px;background-color: #ffffff;">
+                            <div class="slds-col slds-large-size_1-of-1" style="background-color: #ffffff;"> 
+                                
+                                <div class="slds-grid slds-wrap">
+                                    
+                                    <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-p-around--small" >
+                                        <div class="slds-form-element">
+                                            <!-- <label class="slds-form-element__label" for="form-element-01" style="font-weight:bold;">Name</label>-->
+                                            <div class="slds-form-element__control">
+                                                <lightning:input type="email" value="{!v.email}" label="Email" disabled="{!v.disableInput}" required="true"  aura:id="email" autocomplete="off"/>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-p-around--small">
+                                        <div class="slds-form-element">
+                                            <aura:if isTrue="{!v.device=='DESKTOP'}">
+                                                <div class="slds-form-element__control">                                                    
+                                                    <lightning:input type="date" value="{!v.DOB}" placeholder="MM/dd/yyyy" format="MM/dd/yyyy" dateStyle="short"  label="Date of Birth" disabled="{!v.disableInput}" aura:id="DOB" required="true"   autocomplete="off"/>
+                                                </div>
+                                                
+                                                <aura:set attribute="else">
+                                                    <div class="slds-form-element__control">
+                                                        <lightning:input type="text" value="{!v.DOB}" placeholder="MM/dd/yyyy"   dateStyle="short"  label="Date of Birth (MM/dd/yyyy)" disabled="{!v.disableInput}" aura:id="DOB" required="true"   autocomplete="off" onchange="{!c.handleDOBOnMobile}"/>
+                                                    </div>
+                                                </aura:set>
+                                                
+                                            </aura:if>
+                                            
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                            <br/> <br/>
+                            <footer class="slds-modal__footer footerToDisplay slds-p-around--small">
+                                <center>
+                                    <!-- <button class="slds-button slds-button_brand"  onclick="{!c.closeCancelConfirmation}"  >No</button>-->
+                                    <button class="slds-button slds-button_brand" onclick="{!c.handleProceed}">Proceed</button>
+                                </center>
+                            </footer>
+                            
+                        </div>
+                    </aura:if>
+                    
+                    <aura:if isTrue="{!v.showUpload}">
+                        
+                        <div class="slds-col slds-large-size_1-of-1" style="background-color: #ffffff;"> 
+                            
+                            <div class="slds-grid slds-wrap">
+                                
+                                <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-p-around--small" >
+                                    <div class="slds-form-element">
+                                        <div class="slds-form-element__control">
+                                            Dear <b>{!v.objWrapper.objContact.Name}</b>, Please upload the required files.
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-large-size_1-of-1" style="background-color: #ffffff;"> 
+                            
+                            <div class="slds-grid slds-wrap"  >
+                                
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th scope="col" style="text-align:left;background-color: lightgrey;">
+                                                <div class="slds-truncate" title="File Type">Description </div>
+                                            </th> 
+                                            <th scope="col" style="text-align:left;background-color: lightgrey;width:40%;">
+                                                <div class="slds-truncate" title="Description">Files</div>
+                                            </th>
+                                            
+                                            <th scope="col" style="text-align:center;width:10%;background-color: lightgrey;">
+                                                
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding-left: 5px;">
+                                                <lightning:fileUpload multiple="false" 
+                                                                      recordId="{!v.tempRecId}" 
+                                                                      onuploadfinished="{!c.handleUploadFile1}"
+                                                                      label ="File 1"
+                                                                      disabled="{!or(v.file1Id!=null,or(v.tempRecId == null , v.tempRecId == undefined))}" 
+                                                                      accept="{!v.fileTypes}"
+                                                                      class="uploadCmp"
+                                                                      
+                                                                      />
+                                                
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" >{!v.file1Name}</div>
+                                            </td>
+                                            <td>
+                                                <aura:if isTrue="{!not(empty(v.file1Id))}">
+                                                    <button type="button" disabled="" id="{!v.file1Id}" style="width:10px;"  name="file1Delete" class="slds-button slds-button_icon" onclick="{!c.deleteFiles}">
+                                                        <lightning:icon iconName="action:delete" size="small" alternativeText="Back"/>
+                                                    </button> 
+                                                </aura:if>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td style="padding-left: 5px;">
+                                                <lightning:fileUpload multiple="false" 
+                                                                      recordId="{!v.tempRecId}" 
+                                                                      onuploadfinished="{!c.handleUploadFile2}" 
+                                                                      label ="File 2"
+                                                                      disabled="{!or(v.file2Id!=null,or(v.tempRecId == null , v.tempRecId == undefined))}"     
+                                                                      accept="{!v.fileTypes}"
+                                                                      />
+                                                
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" >{!v.file2Name}</div>
+                                            </td>
+                                            <td>
+                                                <aura:if isTrue="{!not(empty(v.file2Id))}">
+                                                    <button type="button" disabled="" name="file2Delete" style="width:10px;"  id="{!v.file2Id}" class="slds-button slds-button_icon" onclick="{!c.deleteFiles}">
+                                                        <lightning:icon iconName="action:delete" size="small" alternativeText="Back"/>
+                                                    </button> 
+                                                </aura:if>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td style="padding-left: 5px;">
+                                                <lightning:fileUpload multiple="false" 
+                                                                      recordId="{!v.tempRecId}" 
+                                                                      onuploadfinished="{!c.handleUploadFile3}" 
+                                                                      label ="File 3"
+                                                                      disabled="{!or(v.file3Id!=null,or(v.tempRecId == null , v.tempRecId == undefined))}"   
+                                                                      accept="{!v.fileTypes}"
+                                                                      />
+                                                
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" >{!v.file3Name}</div>
+                                            </td>
+                                            <td>
+                                                <aura:if isTrue="{!not(empty(v.file3Id))}">
+                                                    <button type="button" disabled="" style="width:10px;"  id="{!v.file3Id}"  name="file3Delete" class="slds-button slds-button_icon" onclick="{!c.deleteFiles}">
+                                                        <lightning:icon iconName="action:delete" size="small" alternativeText="Back"/>
+                                                    </button> 
+                                                </aura:if>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td style="padding-left: 5px;">
+                                                <lightning:fileUpload multiple="false" 
+                                                                      recordId="{!v.tempRecId}" 
+                                                                      onuploadfinished="{!c.handleUploadFile4}" 
+                                                                      label ="File 4"
+                                                                      disabled="{!or(v.file4Id!=null,or(v.tempRecId == null , v.tempRecId == undefined))}" 
+                                                                      accept="{!v.fileTypes}"
+                                                                      />
+                                                
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" >{!v.file4Name}</div>
+                                            </td>
+                                            <td>
+                                                <aura:if isTrue="{!not(empty(v.file4Id))}">
+                                                    <button type="button" disabled="" style="width:10px;"  id="{!v.file4Id}"  name="file4Delete" class="slds-button slds-button_icon" onclick="{!c.deleteFiles}">
+                                                        <lightning:icon iconName="action:delete" size="small" alternativeText="Back"/>
+                                                    </button> 
+                                                </aura:if>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                    </tbody>
+                                </table>
+                                
+                                
+                                
+                                
+                                <br/>
+                                <footer class="slds-modal__footer footerToDisplay" style="width:100%;">
+                                    <center>
+                                        <button class="slds-button slds-button_neutral" onclick="{!c.showCancelUploadConfirm}" disabled="{!v.showSpinner}" >Cancel</button>
+                                        <button class="slds-button slds-button_brand" onclick="{!c.showUploadConfirm}" disabled="{!or(v.showSpinner,and(v.file1Id==null,v.file2Id==null,v.file3Id==null,v.file4Id==null))}">Submit</button>
+                                    </center>
+                                </footer>
+                            </div>
+                            
+                        </div>
+                        
+                    </aura:if>
+                    
+                    <aura:if isTrue="{!v.showCancelUploadConfirm}">
+                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+                            <div class="slds-modal__container">
+                                <header class="slds-modal__header" style=" background: #337AB7 !important;color: #fff;">
+                                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.hideConfirmation}">
+                                        X
+                                        <span class="slds-assistive-text">Close</span>
+                                    </button>
+                                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Confirm to Cancel</h2>
+                                </header>
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    <center><br/>
+                                        
+                                        <p>Are you sure?<br/>
+                                            If you have uploaded any files, those will be deleted.
+                                        </p>
+                                        
+                                        
+                                    </center> 
+                                    <br/>
+                                    <footer class="slds-modal__footer confirmation" style="text-align:center;">
+                                        <button class="slds-button slds-button_neutral" onclick="{!c.hideCancelUploadConfirm}" disabled="{!v.showSpinner}">No</button>
+                                        <button class="slds-button slds-button_brand" onclick="{!c.processCancelUpload}" disabled="{!v.showSpinner}">Yes</button>
+                                        
+                                        
+                                    </footer>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                    </aura:if>
+                    
+                    <aura:if isTrue="{!v.showUploadConfirm}">
+                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+                            <div class="slds-modal__container">
+                                <header class="slds-modal__header" style=" background: #337AB7 !important;color: #fff;">
+                                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.hideConfirmation}">
+                                        X
+                                        <span class="slds-assistive-text">Close</span>
+                                    </button>
+                                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Confirm to Submit</h2>
+                                </header>
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    <center><br/>
+                                        
+                                        <p>Are you sure? 
+                                            
+                                        </p>
+                                        
+                                        
+                                    </center> 
+                                    <br/>
+                                    <footer class="slds-modal__footer confirmation" style="text-align:center;">
+                                        <button class="slds-button slds-button_neutral" onclick="{!c.hideUploadConfirm}" disabled="{!v.showSpinner}">No</button>
+                                        <button class="slds-button slds-button_brand" onclick="{!c.processSubmitUpload}" disabled="{!v.showSpinner}">Yes</button>
+                                        
+                                        
+                                    </footer>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                    </aura:if>
+                    
+                    
+                </lightning:tab>
+            </lightning:tabset>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.showSummary}">
+            <div style="text-align: center;font-size: 15pt;">
+                Congratulations!. You have successfully uploaded the files.
+            </div>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.showSpinner}">
+            <div id="divLoading" >
+                <div class="demo-only demo-only demo-only_viewport demo--inverse" style="height:6rem">
+                    <div class="slds-spinner_container slds-is-fixed">
+                        <div role="status" class="slds-spinner slds-spinner_medium">
+                            <span class="slds-assistive-text">Loading</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        
+    </div>
+    
+</aura:component>

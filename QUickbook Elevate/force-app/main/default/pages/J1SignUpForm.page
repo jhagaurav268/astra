@@ -1,0 +1,2616 @@
+<apex:page docType="html-5.0"   applyHtmlTag="false"  id="thePage" applyBodyTag="false" controller="J1SignUpFormCtrl"  cache="false" showHeader="false" sidebar="false">
+    <!-- <apex:slds /> -->
+    <html>
+        <head>
+            <title>Contact Registration form</title>
+            
+            <apex:includeScript value="{!URLFOR($Resource.Community2, 'Community2/js/jquery-1.10.2.min.js')}" />
+            <apex:includeScript value="{!URLFOR($Resource.Alertify, '/alertify.min.js')}" />
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <style> 
+                
+                .mainForm{
+                    margin-top: 5%;
+                    margin-left: 10%;
+                    margin-right: 10%;
+                    font-size: 12pt !important;
+                }
+            
+            .slds-form-element__label{
+                font-size: 12pt !important;
+                
+            }
+            
+            
+            .mainPaddings{
+                padding-left: 5px;
+                padding-right: 5px;
+                
+            }
+            .highlightedLabel{
+                color:#f76f3cf2;
+                font-size:13px !important;
+                font-weight: bold;
+            }
+            .ph1 {
+                width: 41% !important;
+            }
+            .ph2 {
+                width: 27% !important;
+            }
+            
+            .submitButton{
+                margin-bottom: 2.5em !important;
+                width: 80% !important; 
+                height: 55px !important;
+                padding:1% 10% !important; 
+                margin: 1em !important; 
+                background: #f3744e !important;
+                color: #fff !important;
+                font-size: 18px !important;
+                border-radius: 7px !important;
+            }
+            #errorMessage {
+            pointer-events: auto;
+            }
+            
+            @media only screen and (max-width: 600px) {
+                .mainForm{
+                    margin-top: 3%;
+                    margin-left: 3%;
+                    margin-right: 3%;
+                }
+                
+                .mainPaddings{
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    
+                }
+                
+                .highlightedLabel{
+                    color:#f76f3cf2;
+                    font-size:13pt !important;
+                    font-weight: bold;
+                }
+                .ph1 {
+                    width: 41% !important;
+                }
+                .ph2 {
+                    width: 26% !important;
+                }
+                .slds-form-element__label{
+                    font-size: 12pt !important;
+                    max-width: unset !important;
+                }
+                .slds-form-element__control{
+                    clear: left !important;
+                    position: relative;
+                    padding-left: 0 !important; 
+                    
+                }
+                .submitButton{
+                    margin-bottom: 2.5em !important;
+                    width: 75% !important; 
+                    height: 55px !important;
+                    padding:1% 10% !important; 
+                    margin: 1em !important; 
+                    background: #f3744e !important;
+                    color: #fff !important;
+                    font-size: 18px !important;
+                    border-radius: 7px !important;
+                }
+            } 
+            
+            @media only screen and (min-width: 600px) {
+                .mainForm{
+                    margin-top: 5%;
+                    margin-left: 5%;
+                    margin-right: 5%;
+                }
+                
+                .mainPaddings{
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    
+                }
+                .ph1 {
+                    width: 42% !important;
+                }
+                .ph2 {
+                    width: 26% !important;
+                }
+                .highlightedLabel{
+                    color:#f76f3cf2;
+                    font-size:13pt !important;
+                    font-weight: bold;
+                }
+                .slds-form-element__label{
+                    font-size: 12pt !important;
+                    max-width: unset !important;
+                }
+                .slds-form-element__control{
+                    clear: left !important;
+                    position: relative;
+                    padding-left: 0 !important; 
+                    
+                }
+                .submitButton{
+                    margin-bottom: 2.5em !important;
+                    width: 70% !important; 
+                    height: 55px !important;
+                    padding:1% 10% !important; 
+                    margin: 1em !important; 
+                    background: #f3744e !important;
+                    color: #fff !important;
+                    font-size: 18px !important;
+                    border-radius: 7px !important;
+                }
+            } 
+            
+            @media only screen and (min-width: 768px) {
+                .mainForm{
+                    margin-top: 5%;
+                    margin-left: 5%;
+                    margin-right: 5%;
+                }
+                
+                .mainPaddings{
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    
+                }
+                .ph1 {
+                    width: 42% !important;
+                }
+                .ph2 {
+                    width: 26% !important;
+                }
+                .highlightedLabel{
+                    color:#f76f3cf2;
+                    font-size:13pt !important;
+                    font-weight: bold;
+                }
+                .slds-form-element__label{
+                    font-size: 12pt !important;
+                    max-width: unset !important;
+                }
+                .slds-form-element__control{
+                    clear: left !important;
+                    position: relative;
+                    padding-left: 0 !important; 
+                    
+                }
+                .submitButton{
+                    margin-bottom: 2.5em !important;
+                    width: 60% !important; 
+                    height: 55px !important;
+                    padding:1% 10% !important; 
+                    margin: 1em !important; 
+                    background: #f3744e !important;
+                    color: #fff !important;
+                    font-size: 18px !important;
+                    border-radius: 7px !important;
+                }
+            } 
+            
+            @media only screen and (min-width: 992px) {
+                .mainForm{
+                    margin-top: 5%;
+                    margin-left: 10%;
+                    margin-right: 10%;
+                }
+                
+                .mainPaddings{
+                    padding-left: 25px;
+                    padding-right: 25px;
+                    
+                }
+                .ph1 {
+                    width: 40% !important;
+                }
+                .ph2 {
+                    width: 27% !important;
+                }
+                .highlightedLabel{
+                    color:#f76f3cf2;
+                    font-size:13pt !important;
+                    font-weight: bold;
+                }
+                .slds-form-element__control{
+                    padding-left: 50% !important; 
+                    clear: none !important;
+                    
+                }
+                .slds-form-element__label{
+                    font-size: 12pt !important;
+                    max-width: 42% !important;
+                }
+                .submitButton{
+                    margin-bottom: 2.5em !important;
+                    width: 50% !important; 
+                    height: 55px !important;
+                    padding:1% 10% !important; 
+                    margin: 1em !important; 
+                    background: #f3744e !important;
+                    color: #fff !important;
+                    font-size: 18px !important;
+                    border-radius: 7px !important;
+                }
+            }            
+            
+            @media only screen and (min-width: 1200px) {
+                .mainForm{
+                    margin-top: 5%;
+                    margin-left: 13%;
+                    margin-right: 13%;
+                }
+                
+                .mainPaddings{
+                    padding-left: 72px;
+                    padding-right: 71px;
+                    
+                }
+                .ph1 {
+                    width: 41% !important;
+                }
+                .ph2 {
+                    width: 26% !important;
+                }
+                .highlightedLabel{
+                    color:#f76f3cf2;
+                    font-size:13pt !important;
+                    font-weight: bold;
+                }
+                .slds-form-element__control{
+                    padding-left: 50% !important; 
+                    clear: none !important;
+                    
+                }
+                .slds-form-element__label{
+                    font-size: 12pt !important;
+                    max-width: 40% !important;
+                }
+                .submitButton{
+                    margin-bottom: 2.5em !important;
+                    width: 30% !important; 
+                    height: 55px !important;
+                    padding:1% 10% !important; 
+                    margin: 1em !important; 
+                    background: #f3744e !important;
+                    color: #fff !important;
+                    font-size: 18px !important;
+                    border-radius: 7px !important;
+                }
+            } 
+            
+            @media only screen and (min-width: 1500px) {
+                .mainForm{
+                    margin-top: 5%;
+                    margin-left: 15%;
+                    margin-right: 15%;
+                }
+                
+                .mainPaddings{
+                    padding-left: 100px;
+                    padding-right: 100px;
+                    
+                }
+                
+                .highlightedLabel{
+                    color:#f76f3cf2;
+                    font-size:13pt !important;
+                    font-weight: bold;
+                }
+                .slds-form-element__control{
+                    padding-left: 50% !important; 
+                    clear: none !important;
+                    
+                }
+                .slds-form-element__label{
+                    font-size: 12pt !important;
+                    max-width: 40% !important;
+                }
+                .submitButton{
+                    margin-bottom: 2.5em !important;
+                    width: 30% !important; 
+                    height: 55px !important;
+                    padding:1% 10% !important; 
+                    margin: 1em !important; 
+                    background: #f3744e !important;
+                    color: #fff !important;
+                    font-size: 18px !important;
+                    border-radius: 7px !important;
+                }
+            } 
+            
+            /* Extra large devices (large laptops and desktops, 2000px and up) */
+            @media only screen and (min-width: 2000px) {
+                .mainForm{
+                    margin-top: 5%;
+                    margin-left: 18%;
+                    margin-right: 18%;
+                }
+                
+                .mainPaddings{
+                    padding-left: 150px;
+                    padding-right: 150px;
+                    
+                }
+                
+                .highlightedLabel{
+                    color:#f76f3cf2;
+                    font-size:18px !important;
+                    font-weight: bold;
+                }
+                
+                .slds-form-element__control{
+                    padding-left: 60% !important; 
+                    clear: none !important;
+                    
+                }
+                .slds-form-element__label{
+                    font-size: 12pt !important;
+                    max-width: 40% !important;
+                }
+                .ph1 {
+                    width: 41% !important;
+                }
+                .ph2 {
+                    width: 26% !important;
+                }
+                .submitButton{
+                    margin-bottom: 2.5em !important;
+                    width: 30% !important; 
+                    height: 55px !important;
+                    padding:1% 10% !important; 
+                    margin: 1em !important; 
+                    background: #f3744e !important;
+                    color: #fff !important;
+                    font-size: 18px !important;
+                    border-radius: 7px !important;
+                }
+                
+            } 
+            
+            .slds-scope .slds-form-element__label{
+                padding-top:0rem !important;
+            } 
+            .slds-scope .slds-notify_toast .slds-notify__close, .slds-scope .slds-notify--toast .slds-notify__close{
+                top : 1.25rem !important ;
+            }
+            
+            .slds-scope .slds-input {
+                width: 98% ;
+            }
+            
+            .slds-scope .slds-modal__footer{
+                padding-top : .1rem !important ;
+                padding-bottom : .1rem !important ;
+            }
+            
+            </style>
+            
+            
+            <script>
+                
+                /*Included by Sampath*/
+                function hideDivSLDS(divId){
+                var divToHide="#"+divId;
+                $(divToHide).addClass('slds-hide');
+                //document.getElementById(divId).style.display = "none" ;
+            }
+            
+            
+            function hideDiv(divId){
+                document.getElementById(divId).style.display = "none" ;
+            }
+            function showDiv(divId){
+                document.getElementById(divId).style.display = "block" ;
+            }
+            
+            function isNumber(evt) {
+                
+                var numb = evt.target.value;
+                
+                evt = (evt) ? evt : window.event;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                
+                if (charCode == 8 || charCode == 46 || charCode == 37 || charCode == 38 || charCode == 39 || charCode == 40 || charCode == 9 || (charCode > 45 && charCode < 58) || (charCode > 95 && charCode < 106)) {
+                    return true;
+                } else {
+                    return false;
+                }
+                
+            } 
+            
+            function validateEmail(mailField) 
+            {
+                
+                if(mailField!=null && mailField!=undefined){
+                    var mailformat = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                    
+                    if (mailField.value.match(mailformat))
+                    {
+                        return (true)
+                    }else{
+                        mailField.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Please enter a valid email Id in format abc@mail.com.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                    
+                }
+                
+            }
+            
+            function replaceChars(evt) {
+                //console.log(evt);
+                if (!!/\D/.test(evt.target.value))  {
+                    var origin= evt.target.value;
+                    var newVal= origin.replace(/[^0-9 ]/g, "");
+                    // alert(newVal);
+                    evt.target.value=newVal;
+                    return false;
+                }            
+            }  
+            
+            function replaceCharsInDOB(evt) {
+                
+                var origin= evt.target.value;
+                var listNos=[];
+                if(origin.length>0){
+                    listNos = origin.split('/');
+                }
+                var newVal= origin.replace(/[^0-9 ]/g, "");
+                if(newVal.length >= 2 && newVal.length < 4){
+                    
+                    if(!(isNaN(newVal))){
+                        if(origin.length==3){
+                            document.getElementById("dob").value = newVal.substring(0,2)+"/" +newVal.substring(2,newVal.length); 
+                            
+                        }
+                        else if(origin.length>3){
+                            document.getElementById("dob").value = newVal.substring(0,2)+"/" +newVal.substring(2,newVal.length); 
+                        }
+                            else{
+                                document.getElementById("dob").value = newVal.substring(0,2);
+                            }
+                        
+                    }
+                    
+                }else if(newVal.length == 4){
+                    if(!(isNaN(newVal))){
+                        if(origin.length==6){
+                            document.getElementById("dob").value = newVal.substring(0,2)+"/" +newVal.substring(2,newVal.length)+"/"; 
+                        }
+                        if(origin.length==5){
+                            document.getElementById("dob").value = newVal.substring(0,2)+"/" +newVal.substring(2,newVal.length); 
+                        }
+                        
+                    }
+                    
+                }else  if(newVal.length > 4 ){
+                    if(!(isNaN(newVal))){
+                        if(listNos.length!=3){
+                            document.getElementById("dob").value = newVal.substring(0,2)+"/" +newVal.substring(2,4)+"/" +newVal.substring(4,newVal.length); 
+                        }
+                        
+                    }
+                    
+                } else{
+                    evt.target.value=newVal;
+                }    
+            }   
+            
+            
+            
+            function replaceCharsArrivalToBransonDate(evt) {
+                
+                var origin= evt.target.value;
+                var newVal= origin.replace(/[^0-9 ]/g, "");
+                if(newVal.length >= 2 && newVal.length < 4){
+                    if(!(isNaN(newVal))){
+                        document.getElementById("arrToBransonDate").value = newVal.substring(0,2)+"/" +newVal.substring(2,newVal.length); 
+                        
+                    }
+                    
+                }else if(newVal.length == 4){
+                    if(!(isNaN(newVal))){
+                        document.getElementById("arrToBransonDate").value = newVal.substring(0,2)+"/" +newVal.substring(2,newVal.length)+"/"; 
+                        
+                    }
+                    
+                }else  if(newVal.length > 4 ){
+                    if(!(isNaN(newVal))){
+                        document.getElementById("arrToBransonDate").value = newVal.substring(0,2)+"/" +newVal.substring(2,4)+"/" +newVal.substring(4,newVal.length); 
+                        
+                    }
+                    
+                } else{
+                    evt.target.value=newVal;
+                }    
+            }   
+            
+            function replaceCharsInDepartFromBransonDate(evt) {
+                
+                var origin= evt.target.value;
+                var newVal= origin.replace(/[^0-9 ]/g, "");
+                if(newVal.length >= 2 && newVal.length < 4){
+                    if(!(isNaN(newVal))){
+                        document.getElementById("depFromBransonDate").value = newVal.substring(0,2)+"/" +newVal.substring(2,newVal.length); 
+                        
+                    }
+                    
+                }else if(newVal.length == 4){
+                    if(!(isNaN(newVal))){
+                        document.getElementById("depFromBransonDate").value = newVal.substring(0,2)+"/" +newVal.substring(2,newVal.length)+"/"; 
+                        
+                    }
+                    
+                }else  if(newVal.length > 4 ){
+                    if(!(isNaN(newVal))){
+                        document.getElementById("depFromBransonDate").value = newVal.substring(0,2)+"/" +newVal.substring(2,4)+"/" +newVal.substring(4,newVal.length); 
+                        
+                    }
+                    
+                } else{
+                    evt.target.value=newVal;
+                }    
+            }   
+            
+            
+            <!-- comment's -->
+            
+            function inputLimiter(e, val , allow) {
+                var AllowableCharacters = '' ;  
+                
+                if (allow == 'Letters'){ AllowableCharacters =' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';}
+                if (allow == 'Numbers'){ AllowableCharacters ='1234567890';}
+                if (allow == 'NameCharacters'){ AllowableCharacters =' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-.\'';}
+                if (allow == 'NameCharactersAndNumbers'){ AllowableCharacters ='1234567890 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-\'';}
+                if (allow == 'Currency'){ AllowableCharacters ='1234567890.';}
+                if(allow == 'date'){AllowableCharacters ='1234567890';}
+                var k = document.all? parseInt(e.keyCode): parseInt(e.which);
+                
+                if((val.trim().length == 0 || val.trim().length == 1) && e.key == ' ' ){
+                    return false ;
+                }
+                
+                
+                if (k!=13 && k!=8 && k!=0 && k!= 9 && k!= 37 && k!= 39 ){
+                    
+                    if(allow == 'date' && k== 47){
+                        return true ;
+                    }
+                    
+                    if (( e.ctrlKey == false) && (e.altKey == false)) {
+                        if(AllowableCharacters.indexOf(String.fromCharCode(k)) != -1){
+                            return true ;
+                        }else{
+                            return false ;
+                        }
+                    } else {
+                        
+                    }
+                } else {
+                    return true;
+                }
+            }
+            
+            function validateDateLength(a){
+                if(a.length > 10 ){
+                    return false ;
+                }
+            }
+            
+            function checkDatePins(datVal){
+                var originalVal= JSON.parse(JSON.stringify(datVal));
+                var temp=datVal;
+                if(temp.includes("/")){
+                    temp= temp.replace('/','');
+                }
+                if(typeof temp!='number'){
+                    return false;
+                }
+                if(datVal.length == 2 && parseInt(datVal) > 12){
+                    document.getElementById("dob").value = datVal ; 
+                    return false ;
+                }
+                
+                if(datVal.length == 5 && parseInt(datVal.substring(3,5)) > 31){
+                    document.getElementById("dob").value = datVal ;
+                    
+                    return false ;
+                }
+                if(datVal.length == 2 ){
+                    if(!(isNaN(datVal))){
+                        document.getElementById("dob").value = datVal+"/" ;
+                    }
+                }
+                if(datVal.length == 5 ){
+                    if(!(isNaN(datVal.substring(3,5)))){
+                        document.getElementById("dob").value = datVal+"/" ;
+                    }
+                }
+                
+            } 
+            
+            
+            
+            function checkReferredByPanelDiv(a){
+                //debugger ;
+                if(a == 'Yes'){
+                    document.getElementById('referredByPanelDiv').style.display = "block" ;
+                }else{
+                    document.getElementById('referredByPanelDiv').style.display = "none" ;
+                }
+                return false;
+            }    
+            
+            function haveValidDLOnChange(){
+                
+                var addressfor1 = document.getElementById("{!$Component.thePage:frm:addressfor1}");
+                if(addressfor1 !=null){                    
+                    if( addressfor1.value== 'No'){
+                        var driverLcNo = document.getElementById("{!$Component.thePage:frm:driverLcNo}");
+                        if(driverLcNo !=null){
+                            driverLcNo.value='';
+                        }
+                    }
+                }
+                return false;
+            }
+            
+            function onBeforeSubmit(event){
+                var driverLcNo = document.getElementById("{!$Component.thePage:frm:driverLcNo}");
+                if(driverLcNo !=null){
+                    
+                    if(driverLcNo.required && (driverLcNo.value==null || driverLcNo.value=='')){
+                        driverLcNo.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Driver\'s License Number is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                //debugger ;
+                
+                var driverLcCountry = document.getElementById("{!$Component.thePage:frm:driverLcCountry}");
+                if(driverLcCountry !=null){
+                    
+                    if(driverLcCountry.required && (driverLcCountry.value==null || driverLcCountry.value== '')){
+                        driverLcCountry.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Driver\'s License Country is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                } 
+                
+                
+                if(driverLcCountry != null && driverLcCountry.value != null && driverLcCountry.value == 'United States'){  
+                    var driverLcState = document.getElementById("{!$Component.thePage:frm:driverLcState}");
+                    
+                    if(driverLcState  != null){  
+                        if(driverLcState.required && (driverLcState.value==null || driverLcState.value=='')){
+                            driverLcState.focus();
+                            $("#divError h2").each(function() {
+                                $(this).text('Driver\'s License State is required.');
+                            });
+                            $("#divError").removeClass('slds-hide');
+                            setTimeout(function() {
+                                $("#divError").addClass('slds-hide');
+                            }, 10000); 
+                            return false;
+                        }
+                    }
+                }
+                
+                
+                var fname2 = document.getElementById("{!$Component.thePage:frm:fname2}");
+                if(fname2 !=null){
+                    
+                    if(fname2.required && (fname2.value==null || fname2.value=='')){
+                        fname2.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('First Name is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var lname = document.getElementById("{!$Component.thePage:frm:lname}");
+                if(lname !=null){
+                    
+                    if(lname.required && (lname.value==null || lname.value=='')){
+                        lname.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Last Name is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var cCode = document.getElementById("{!$Component.thePage:frm:countryCode}");
+                
+                if(cCode !=null){
+                    
+                    if(cCode.required && (cCode.value==null || cCode.value=='')){
+                        cCode.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Country Code is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var ph1 = document.getElementById("ph1");
+                if(ph1 !=null){
+                    
+                    if(ph1.required && (ph1.value==null || ph1.value=='')){
+                        ph1.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Phone Number is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var ph2 = document.getElementById("ph2");
+                if(ph2 !=null){
+                    
+                    if(ph2.required && (ph2.value==null || ph2.value=='')){
+                        ph2.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Phone Number is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var ph3 = document.getElementById("ph3");
+                if(ph3 !=null){
+                    
+                    if(ph3.required && (ph3.value==null || ph3.value=='')){
+                        ph3.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Phone Number is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var isThisYourMobile = document.getElementById("{!$Component.thePage:frm:isThisYourMobile}");
+                if(isThisYourMobile !=null){
+                    
+                    if(isThisYourMobile.required && (isThisYourMobile.value==null || isThisYourMobile.value=='')){
+                        isThisYourMobile.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Please select a value for Is this your mobile number.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var conEmail =  document.getElementById("{!$Component.thePage:frm:conEmail}");
+                if(conEmail !=null){
+                    conEmail.setCustomValidity("");
+                    if(conEmail.value==null || conEmail.value==''){
+                        conEmail.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Email is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                    if(!validateEmail(conEmail)){
+                        return false;
+                    }
+                    
+                }                
+                
+                var preferredmethodOfComm = document.getElementById("{!$Component.thePage:frm:preferredmethodOfComm}");
+                if(preferredmethodOfComm !=null){
+                    
+                    if(preferredmethodOfComm.required && (preferredmethodOfComm.value==null || preferredmethodOfComm.value=='')){
+                        preferredmethodOfComm.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Preferred Method of Communication is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var mob1 = document.getElementById("mob1");
+                if(mob1 !=null){
+                    
+                    if(mob1.required && (mob1.value==null || mob1.value=='')){
+                        mob1.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Mobile Number is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var mob2 = document.getElementById("mob2");
+                if(mob2 !=null){
+                    
+                    if(mob2.required && (mob2.value==null || mob2.value=='')){
+                        mob2.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Mobile Number is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var mob3 = document.getElementById("mob3");
+                if(mob3 !=null){
+                    
+                    if(mob3.required && (mob3.value==null || mob3.value=='')){
+                        mob3.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Mobile Number is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var add = document.getElementById("{!$Component.thePage:frm:add}");
+                if(add !=null){
+                    
+                    if(add.required && (add.value==null || add.value=='')){
+                        add.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Street Address is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var city = document.getElementById("{!$Component.thePage:frm:city}");
+                if(city !=null){
+                    
+                    if(city.required && (city.value==null || city.value=='')){
+                        city.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('City is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var state = document.getElementById("{!$Component.thePage:frm:state}");
+                if(state !=null){
+                    
+                    if(state.required && (state.value==null || state.value=='')){
+                        state.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('State is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var postal = document.getElementById("{!$Component.thePage:frm:postalhome}");
+                if(postal !=null){
+                    
+                    if(postal.required && (postal.value==null || postal.value=='')){
+                        postal.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Zip Code is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var IHaveLivedAt = document.getElementById("{!$Component.thePage:frm:IHaveLivedAt}");
+                if(IHaveLivedAt !=null){
+                    
+                    if(IHaveLivedAt.required && (IHaveLivedAt.value==null || IHaveLivedAt.value=='')){
+                        IHaveLivedAt.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Please select a value for I have lived at this address for.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var add1 = document.getElementById("{!$Component.thePage:frm:add1}");
+                if(add1 !=null){
+                    
+                    if(add1.required && (add1.value==null || add1.value=='')){
+                        add1.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('USA Mailing Address is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var city1 = document.getElementById("{!$Component.thePage:frm:city1}");
+                if(city1 !=null){
+                    
+                    if(city1.required && (city1.value==null || city1.value=='')){
+                        city1.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('City is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var state1 = document.getElementById("{!$Component.thePage:frm:state1}");
+                if(state1 !=null){
+                    
+                    if(state1.required && (state1.value==null || state1.value=='')){
+                        state1.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('State is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var postal1 = document.getElementById("postal1");
+                if(postal1 !=null){
+                    
+                    if(postal1.required && (postal1.value==null || postal1.value=='')){
+                        postal1.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Postal / Zip Code is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var dob = document.getElementById("dob");
+                if(dob !=null){
+                    
+                    if(dob.required && (dob.value==null || dob.value=='')){
+                        dob.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Date of Birth is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                
+                var passportNumber = document.getElementById("{!$Component.thePage:frm:passportNumber}");
+                if(passportNumber !=null){
+                    
+                    if(passportNumber.required && (passportNumber.value==null || passportNumber.value=='')){
+                        passportNumber.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Passport Number is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }  
+                
+                
+                var hadAnyTickets = document.getElementById("{!$Component.thePage:frm:hadAnyTickets}");
+                if(hadAnyTickets !=null){
+                    
+                    if(hadAnyTickets.required && (hadAnyTickets.value==null || hadAnyTickets.value=='')){
+                        hadAnyTickets.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Please select a value for Have you had any tickets or accidents.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                
+                var gender = document.getElementById("{!$Component.thePage:frm:gender}");
+                if(gender !=null){
+                    
+                    if(gender.required && (gender.value==null || gender.value=='')){
+                        gender.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Gender is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var ethnicity = document.getElementById("{!$Component.thePage:frm:ethnicity}");
+                if(ethnicity !=null){
+                    
+                    if(ethnicity.required && (ethnicity.value==null || ethnicity.value=='')){
+                        ethnicity.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Ethnicity is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var maritalStatus = document.getElementById("{!$Component.thePage:frm:maritalStatus}");
+                if(ethnicity !=null){
+                    
+                    if(maritalStatus.required && (maritalStatus.value==null || maritalStatus.value=='')){
+                        maritalStatus.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Marital Status is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                
+                var highestLevelEdu = document.getElementById("{!$Component.thePage:frm:highestLevelEdu}");
+                if(ethnicity !=null){
+                    
+                    if(highestLevelEdu.required && (highestLevelEdu.value==null || highestLevelEdu.value=='')){
+                        highestLevelEdu.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Highest level of education is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                
+                
+                var noOfRidingExp = document.getElementById("{!$Component.thePage:frm:noOfRidingExp}");
+                if(noOfRidingExp !=null){
+                    
+                    if(noOfRidingExp.required && (noOfRidingExp.value==null || noOfRidingExp.value=='')){
+                        noOfRidingExp.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Number of years of experience riding a motorcycle is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                
+                
+                var leadSource = document.getElementById("{!$Component.thePage:frm:leadSource}");
+                if(leadSource !=null){
+                    
+                    if(leadSource.required && (leadSource.value==null || leadSource.value=='')){
+                        leadSource.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('How did you hear about us is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var wereReferredBy = document.getElementById("{!$Component.thePage:frm:wereReferredBy}");
+                if(wereReferredBy !=null){
+                    
+                    if(wereReferredBy.required && (wereReferredBy.value==null || wereReferredBy.value=='')){
+                        wereReferredBy.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Were you referred by someone is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var referredBy = document.getElementById("{!$Component.thePage:frm:referredBy}");
+                if(referredBy !=null){
+                    
+                    if(wereReferredBy.value=='Yes' && (referredBy.value==null || referredBy.value=='')){
+                        referredBy.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Referred By is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                //Added By Sampath 02/15/2023
+                var sponsorName = document.getElementById("{!$Component.thePage:frm:sponsorName}");
+                if(sponsorName !=null){
+                    
+                    if(sponsorName.required && (sponsorName.value==null || sponsorName.value=='')){
+                        sponsorName.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Sponsor Name is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var sponsoradd = document.getElementById("{!$Component.thePage:frm:sponsoradd}");
+                if(sponsoradd !=null){
+                    
+                    if(sponsoradd.required && (sponsoradd.value==null || sponsoradd.value=='')){
+                        sponsoradd.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Sponsor Mailing Address is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var sponsoraddLine = document.getElementById("{!$Component.thePage:frm:sponsoraddLine}");
+                if(sponsoraddLine !=null){
+                    
+                    if(sponsoraddLine.required && (sponsoraddLine.value==null || sponsoraddLine.value=='')){
+                        sponsoraddLine.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Sponsor Sponsor Address Line 2 is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var sponsorcity = document.getElementById("{!$Component.thePage:frm:sponsorcity}");
+                if(sponsorcity !=null){
+                    
+                    if(sponsorcity.required && (sponsorcity.value==null || sponsorcity.value=='')){
+                        sponsorcity.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Sponsor City is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var sponsorstate = document.getElementById("{!$Component.thePage:frm:sponsorstate}");
+                if(sponsorstate !=null){
+                    
+                    if(sponsorstate.required && (sponsorstate.value==null || sponsorstate.value=='')){
+                        sponsorstate.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Sponsor State is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var sponsorpostal = document.getElementById("{!$Component.thePage:frm:sponsorpostal}");
+                if(sponsorpostal !=null){
+                    
+                    if(sponsorpostal.required && (sponsorpostal.value==null || sponsorpostal.value=='')){
+                        sponsorpostal.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Sponsor Zip Code is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var arrToBransonDate = document.getElementById("arrToBransonDate");
+                if(arrToBransonDate !=null){
+                    
+                    if(arrToBransonDate.required && (arrToBransonDate.value==null || arrToBransonDate.value=='')){
+                        arrToBransonDate.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Arrival to Branson Date is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var depFromBransonDate = document.getElementById("depFromBransonDate");
+                if(depFromBransonDate !=null){
+                    
+                    if(depFromBransonDate.required && (depFromBransonDate.value==null || depFromBransonDate.value=='')){
+                        depFromBransonDate.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Departure from Branson Date is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                /*End Added by Sampath*/
+                
+                
+                var employer = document.getElementById("{!$Component.thePage:frm:employer}");
+                if(employer !=null){
+                    
+                    if(employer.required && (employer.value==null || employer.value=='')){
+                        employer.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Employer is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                
+                var addHire = document.getElementById("{!$Component.thePage:frm:addHire}");
+                if(addHire !=null){
+                    
+                    if(addHire.required && (addHire.value==null || addHire.value=='')){
+                        addHire.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text('Employer Street Address is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var cityHire = document.getElementById("{!$Component.thePage:frm:cityHire}");
+                if(cityHire !=null){
+                    
+                    if(cityHire.required && (cityHire.value==null || cityHire.value=='')){
+                        cityHire.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text(' Employer City is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var stateHire = document.getElementById("{!$Component.thePage:frm:stateHire}");
+                if(stateHire !=null){
+                    
+                    if(stateHire.required && (stateHire.value==null || stateHire.value=='')){
+                        stateHire.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text(' Employer State is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                var postalHire = document.getElementById("postalHire");
+                if(postalHire !=null){
+                    
+                    if(postalHire.required && (postalHire.value==null || postalHire.value=='')){
+                        postalHire.focus();
+                        $("#divError h2").each(function() {
+                            $(this).text(' Employer Zip Code is required.');
+                        });
+                        $("#divError").removeClass('slds-hide');
+                        setTimeout(function() {
+                            $("#divError").addClass('slds-hide');
+                        }, 10000); 
+                        return false;
+                    }
+                }
+                
+                
+                var ph1 = document.getElementById("ph1").value==null?'':document.getElementById("ph1").value;
+                var ph2 = document.getElementById("ph2").value==null?'':document.getElementById("ph2").value;
+                var ph3 = document.getElementById("ph3").value==null?'':document.getElementById("ph3").value;
+                
+                var mob1 = document.getElementById("mob1"); 
+                if(mob1!=null){
+                    mob1 = mob1.value==null?'':mob1.value; 
+                }
+                var mob2 = document.getElementById("mob2"); 
+                if(mob2!=null){
+                    mob2 = mob2.value==null?'':mob2.value; 
+                }
+                var mob3 = document.getElementById("mob3"); 
+                if(mob3!=null){
+                    mob3 = mob3.value==null?'':mob3.value; 
+                }
+                
+                
+                var postal1 = document.getElementById("postal1"); 
+                if(postal1!=null){
+                    postal1 = postal1.value==null?'':postal1.value; 
+                }
+                var postalHire = document.getElementById("postalHire"); 
+                if(postalHire!=null){
+                    postalHire = postalHire.value==null?'':postalHire.value; 
+                }
+                
+                var mailingPostalCode = document.getElementById("depFromBransonDate").value==null?'':document.getElementById("depFromBransonDate").value;
+                var dob = document.getElementById("dob").value==null?'':document.getElementById("dob").value;
+                var arvlToBransonDate = document.getElementById("arrToBransonDate").value==null?'':document.getElementById("arrToBransonDate").value;
+                var depFromBransonDate = document.getElementById("depFromBransonDate").value==null?'':document.getElementById("depFromBransonDate").value;
+                
+                
+                bindInputValuesFn(dob ,ph1 ,ph2 ,ph3 ,mob1 ,mob2 ,mob3 ,postal1,postalHire,mailingPostalCode , arvlToBransonDate, depFromBransonDate  );
+            }
+            
+            
+            </script>
+            
+        </head>
+        
+        
+        
+        
+        <body Style="background-image:url('{!$Resource.img}');    background-repeat: repeat;">
+            <apex:slds />
+            <div class="slds-scope">
+                
+                <!-- section -->
+                <section class="register">
+                    
+                    
+                    <apex:outputPanel id="errorPanel">
+                        <apex:outputPanel rendered="{!errorMessages.size > 0}">
+                            <div class="slds-notify_container" id="divErrorMsg" >
+                                <div class="slds-notify slds-notify--toast slds-theme--error" role="alert">
+                                    <span class="slds-assistive-text">Warning</span>
+                                    <button class="slds-button slds-notify__close slds-button--icon-inverse" title="Close" onclick="hideDivSLDS('divErrorMsg'); return false;">
+                                        <svg class="slds-button__icon slds-button__icon--large" aria-hidden="true" onclick="return false;" data="msg">
+                                            <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS,'/assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+                                        </svg>
+                                        <span class="slds-assistive-text">Close</span>
+                                    </button>
+                                    <div class="slds-notify__content">
+                                        
+                                        <p class="en">
+                                            <strong>You cannot proceed unless you fix the below issues</strong>
+                                            <apex:repeat value="{!errorMessages}" var="item">
+                                                <br/> &nbsp;&nbsp; - {!item} 
+                                            </apex:repeat>
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </apex:outputPanel> 
+                    </apex:outputPanel>
+                    
+                    
+                    <!-- dynamically render errors before submit-->
+                    <div id="divError" class="slds-hide" >
+                        <div class="slds-notify_container" >
+                            <div class="slds-notify slds-notify--toast slds-theme--error" role="alert">
+                                <span class="slds-assistive-text">Warning</span>
+                                <button class="slds-button slds-notify__close slds-button--icon-inverse" title="Close" onclick="hideDivSLDS('divError'); return false;">
+                                    <svg class="slds-button__icon slds-button__icon--large" aria-hidden="true" onclick="return false;" data="msg">
+                                        <use xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS,'/assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                                <div class="slds-notify__content">
+                                    
+                                    <h2 class="slds-text-heading--small"> </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <apex:outputPanel id="containerPanel">
+                        <div  style="pointer-events:auto;">
+                            
+                            <div  class="mainForm" >
+                                
+                                <div style="padding:1rem;" >
+                                    
+                                    <div class = "header " style="text-align: center;background-color: #ffffff;padding-top:10px;">
+                                        
+                                        <apex:image url="{!$Resource.BransonLogo}" style="width: 35%;" />
+                                        <div style="font-size: 24px; font-weight: bold;  padding-bottom: 20px;  padding-top: 20px;">
+                                            Apply to Ride
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="width: 100%;background-color: #ffffff;padding-bottom: 10px;">
+                                        
+                                        <apex:outputPanel id="mainPanel" rendered="{!NOT(contactCreated)}">
+                                            
+                                            
+                                            <apex:form id="frm" styleClass="mainPaddings"  >
+                                                <apex:actionFunction reRender="discInfo,submitPanel" name="showSubmitButton"  />
+                                                <apex:actionFunction reRender="licenseInnerPanel,frm" name="showLicense" />
+                                                
+                                                <apex:actionFunction name="showSubmitPopup" action="{!showPopup}" status="mySaveStatus" ReRender="popUpPanel,errorPanel,pnlScript" oncomplete="renderPopupScreen();">
+                                                    
+                                                </apex:actionFunction> 
+                                                
+                                                <apex:actionFunction name="bindInputValuesFn" action="{!bindInputValues}" status="mySaveStatus" ReRender="pnlScript,popUpPanel"  oncomplete="showSubmitPopup();" >
+                                                    <apex:param name="dobVal" value=""/>
+                                                    <apex:param name="ph1Val" value=""/>
+                                                    <apex:param name="ph2Val" value=""/>
+                                                    <apex:param name="ph3Val" value=""/>                                                   
+                                                    <apex:param name="mob1Val" value=""/>
+                                                    <apex:param name="mob2Val" value=""/>
+                                                    <apex:param name="mob3Val" value=""/>
+                                                    <apex:param name="postal1Val" value=""/>
+                                                    <apex:param name="postalHireVal"  value=""/>
+                                                    <apex:param name="mailingPostalCodeVal"  value=""/>
+                                                    <apex:param name="arvltoBransonDate"  value=""/>
+                                                    <apex:param name="depFromBransonDate"  value=""/>
+                                                    
+                                                    
+                                                </apex:actionFunction>
+                                                
+                                                <apex:outputPanel id="pnlScript">
+                                                    <script>
+                                                    
+                                                    function renderPopupScreen() {
+                                                        $("div[id$=divPopup]").removeClass('slds-hide');
+                                                        showDiv('divPopup');
+                                                    }
+                                                    </script>
+                                                </apex:outputPanel>
+                                                
+                                                
+                                                <div id="licenseQuest">                                                    
+                                                    
+                                                    <div class="slds-form mainPaddings">
+                                                        <div class="slds-form-element slds-form-element_horizontal">
+                                                            <label class="slds-form-element__label highlightedLabel" for="addressfor1" style="color: #f76f3cf2; font-weight: bold;   ">Do you have a valid driver's license?<span style="color:red;">*</span></label>
+                                                            <div class="slds-form-element__control">
+                                                                <apex:actionRegion > 
+                                                                    <apex:inputField required="true"  value="{!conObj.Do_you_have_a_valid_driver_s_license__c}" id="addressfor1"   styleclass="slds-input"  >
+                                                                        <apex:actionSupport event="onchange" reRender="frm"  oncomplete="haveValidDLOnChange()"/>
+                                                                    </apex:inputField>
+                                                                </apex:actionRegion>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                    
+                                                </div>
+                                                
+                                                
+                                                <apex:outputPanel id="licensePanel" >
+                                                    <div id="licensePanelOuter" style="{!IF(conObj.Do_you_have_a_valid_driver_s_license__c != '' && conObj.Do_you_have_a_valid_driver_s_license__c != null , '' , 'display:none')}"> 
+                                                        
+                                                        <div id="noPanelDiv" style="{!IF(conObj.Do_you_have_a_valid_driver_s_license__c == 'Yes' , '' , 'display:none')}">
+                                                            <div class="slds-grid slds-wrap mainPaddings" style="width:100%" >
+                                                                
+                                                                
+                                                                <div class="slds-col slds-size--1-of-1 ">
+                                                                    
+                                                                    <div class="slds-form-element slds-form-element_horizontal">
+                                                                        <label class="slds-form-element__label" for="driverLcNo" >
+                                                                            Driver's License Number  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                        </label>
+                                                                        <div class="slds-form-element__control">
+                                                                            <apex:inputField id="driverLcNo" value="{!conObj.Drivers_License_Number_with_state__c}" required="{!conObj.Do_you_have_a_valid_driver_s_license__c == 'Yes'}"   styleClass="slds-input" /> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="slds-col slds-size--1-of-1 ">
+                                                                    
+                                                                    <div class="slds-form-element slds-form-element_horizontal">
+                                                                        <label class="slds-form-element__label" for="driverLcCountry" >
+                                                                            Driver's License Country  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                        </label>
+                                                                        <apex:actionRegion >
+                                                                            <div class="slds-form-element__control">
+                                                                                <apex:inputField id="driverLcCountry" value="{!conObj.Drivers_License_Country__c}" required="{!conObj.Do_you_have_a_valid_driver_s_license__c == 'Yes'}"   styleClass="slds-input" >
+                                                                                    <apex:actionSupport event="onchange" reRender="statePanel" />
+                                                                                </apex:inputField> 
+                                                                            </div>
+                                                                        </apex:actionRegion>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <apex:outputPanel id="statePanel" style="width:100%;">     
+                                                                    <div class="slds-col slds-size--1-of-1" style="{!IF(conObj.Drivers_License_Country__c == 'United States' , '' , 'display:none')}">
+                                                                        <div class="slds-form-element slds-form-element_horizontal">
+                                                                            <label class="slds-form-element__label"  >Driver's License State <span style="color:red;">*</span></label> 
+                                                                            <div class="slds-form-element__control">
+                                                                                <apex:inputField required="{!conObj.Do_you_have_a_valid_driver_s_license__c == 'Yes' && conObj.Drivers_License_Country__c == 'United States'}"  value="{!conObj.Drivers_License_State_PickList__c}"   styleclass="slds-input" id="driverLcState" >
+                                                                                </apex:inputField>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </apex:outputPanel>  
+                                                                
+                                                            </div>
+                                                            
+                                                            
+                                                        </div> 
+                                                        
+                                                        
+                                                        <div class="slds-grid slds-wrap mainPaddings" style="width:100%" >
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        First Name  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField value="{!conObj.firstname}"  required="true"   styleClass="slds-input" onkeydown="return inputLimiter(event, this.value , 'NameCharacters')" id="fname2" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Last Name  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField value="{!conObj.lastname}" required="true"  onkeydown="return inputLimiter(event, this.value , 'NameCharacters')" styleClass="slds-input" id="lname" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Country Code <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField value="{!conObj.Country_Code__c}" required="true"  styleClass="slds-input" id="countryCode" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Phone Number  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        
+                                                                        <input type="text" value="{!ph1}"  class="slds-input ph2 phoneInputs" maxlength="3" required="true" id="ph1" html-placeholder="" style=""  onkeydown="return isNumber(event);"
+                                                                               oninput="return replaceChars(event);"/>
+                                                                        <input type="text" value="{!ph2}"  class="slds-input ph2 phoneInputs" id="ph2" required="true" style="  margin-left: 4px;" maxlength="3" html-placeholder="" onkeydown="return isNumber(event);"
+                                                                               oninput="return replaceChars(event);"/>
+                                                                        <input type="text" value="{!ph3}"  class="slds-input ph1 phoneInputs" id="ph3" required="true" style="  margin-left: 4px;" maxlength="4" html-placeholder="" onkeydown="return isNumber(event);"
+                                                                               oninput="return replaceChars(event);"/>
+                                                                        <script>
+                                                                        $(".phoneInputs").keyup(function () {
+                                                                            if (this.value.length == this.maxLength) {
+                                                                                $(this).next('.phoneInputs').focus();
+                                                                            }
+                                                                        });
+                                                                        </script>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <apex:actionRegion > 
+                                                                <div class="slds-col slds-size--1-of-1 ">
+                                                                    
+                                                                    <div class="slds-form-element slds-form-element_horizontal">
+                                                                        <label class="slds-form-element__label"  >
+                                                                            Is this your mobile number?  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                        </label>
+                                                                        <div class="slds-form-element__control">
+                                                                            <apex:inputField value="{!conObj.Is_the_mobile_no_given__c}"  required="true"   styleClass="slds-input" id="isThisYourMobile" >
+                                                                                <apex:actionSupport event="onchange" reRender="mobileOuterPanel , yesTextPFMOC" />
+                                                                            </apex:inputField>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </apex:actionRegion>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Email  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!conObj.email}" maxlength="80" required="true" id="conEmail" onchange="validateEmail(this);" styleClass="slds-input"  />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div style="width:100%;">
+                                                                
+                                                                <apex:outputPanel id="mobileOuterPanel" >
+                                                                    <apex:actionRegion >  
+                                                                        <div class="slds-col slds-size--1-of-1 ">
+                                                                            
+                                                                            <div class="slds-form-element slds-form-element_horizontal">
+                                                                                <label class="slds-form-element__label"  >
+                                                                                    Preferred Method of Communication  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                                </label>
+                                                                                <div class="slds-form-element__control">
+                                                                                    <apex:inputField value="{!conObj.Preferred_Method_of_Communication_PL__c}"  required="true" styleClass="slds-input" id="preferredmethodOfComm" >
+                                                                                        <apex:actionSupport event="onchange" reRender="mobileOuterPanel , yesTextPFMOC" />
+                                                                                    </apex:inputField>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                    </apex:actionRegion>
+                                                                    
+                                                                    <apex:outputPanel style="display: inline-block;" id="yesTextPFMOC" rendered="{!IF(conObj.Preferred_Method_of_Communication_PL__c == 'Text' && conObj.Is_the_mobile_no_given__c == 'No', true , false)}">     
+                                                                        
+                                                                        <div class="slds-col slds-size--1-of-1 ">
+                                                                            
+                                                                            <div class="slds-form-element slds-form-element_horizontal">
+                                                                                <label class="slds-form-element__label"  >
+                                                                                    Mobile Number  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                                </label>
+                                                                                <div class="slds-form-element__control">
+                                                                                    <input type="text" value="{!mob1}" class="slds-input ph2 phoneInputs" maxlength="3" required="{!conObj.Preferred_Method_of_Communication_PL__c == 'Text'}" id="mob1" html-placeholder="" style=""  onkeydown="return isNumber(event);"
+                                                                                           oninput="return replaceChars(event);"/>
+                                                                                    <input type="text" value="{!mob2}" class="slds-input ph2 phoneInputs" id="mob2" required="{!conObj.Preferred_Method_of_Communication_PL__c == 'Text'}" style="margin-left: 4px;" maxlength="3" html-placeholder="" onkeydown="return isNumber(event);"
+                                                                                           oninput="return replaceChars(event);"/>
+                                                                                    <input type="text" value="{!mob3}" class="slds-input ph1 phoneInputs" id="mob3" required="{!conObj.Preferred_Method_of_Communication_PL__c == 'Text'}" style="margin-left: 4px;" maxlength="4" html-placeholder="" onkeydown="return isNumber(event);"
+                                                                                           oninput="return replaceChars(event);"/>
+                                                                                    <script>
+                                                                                    $(".phoneInputs").keyup(function () {
+                                                                                        if (this.value.length == this.maxLength) {
+                                                                                            $(this).next('.phoneInputs').focus();
+                                                                                        }
+                                                                                    });
+                                                                                    </script>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                    </apex:outputPanel> 
+                                                                </apex:outputPanel> 
+                                                                
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Home Country Mailing Address   <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!conObj.Home_Country_Street_JI__c}" required="true" maxlength="50"  onkeyup="this.value" styleClass="slds-input" id="add" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Address Line 2   
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!otherLine2}" maxlength="50" onkeyup="this.value" styleClass="slds-input" id="addLine" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        City  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!conObj.Home_Country_City_J1__c}" required="true" maxlength="50"  onkeyup="this.value" onkeydown="return inputLimiter(event, this.value , 'NameCharacters')" styleClass="slds-input" id="city" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        State/Province/Region <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField value="{!conObj.Home_Country_State_J1__c}" required="true"  styleClass="slds-input" id="state" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Zip Code  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField value="{!conObj.Home_Country_Zip_Code_J1__c}" required="true"  styleClass="slds-input" id="postalhome" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                <apex:actionRegion > 
+                                                                    <div class="slds-form-element slds-form-element_horizontal">
+                                                                        <label class="slds-form-element__label"  >
+                                                                            I have lived at this address for  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                        </label>
+                                                                        <div class="slds-form-element__control">
+                                                                            
+                                                                            <apex:inputField required="true" value="{!conObj.Lived_at_this_address_for_J1__c}"  styleclass="slds-input" id="IHaveLivedAt" >
+                                                                                
+                                                                            </apex:inputField>     
+                                                                        </div>
+                                                                    </div>
+                                                                </apex:actionRegion>
+                                                            </div>
+                                                            
+                                                            <!--Mailing Address details-->
+                                                            <div id="lessThen5YearsAddressDiv" style="width:100%;">
+                                                                <apex:outputPanel id="pnlLessThen5YearsAddress">
+                                                                    
+                                                                    
+                                                                    <div class="slds-col slds-size--1-of-1 ">
+                                                                        
+                                                                        <div class="slds-form-element slds-form-element_horizontal">
+                                                                            <label class="slds-form-element__label"  >
+                                                                                USA Mailing Address    <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                            </label>
+                                                                            <div class="slds-form-element__control">
+                                                                                <apex:inputText value="{!conObj.MailingStreet}" required="true"  maxlength="80"   onkeyup="this.value" styleClass="slds-input" id="add1" />
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="slds-col slds-size--1-of-1 ">
+                                                                        
+                                                                        <div class="slds-form-element slds-form-element_horizontal">
+                                                                            <label class="slds-form-element__label"  >
+                                                                                Address Line 2
+                                                                            </label>
+                                                                            <div class="slds-form-element__control">
+                                                                                <apex:inputText value="{!mailingLine2}" maxlength="80"  onkeyup="this.value" styleClass="slds-input" id="addLine1" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="slds-col slds-size--1-of-1 ">
+                                                                        
+                                                                        <div class="slds-form-element slds-form-element_horizontal">
+                                                                            <label class="slds-form-element__label"  >
+                                                                                City   <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                            </label>
+                                                                            <div class="slds-form-element__control">
+                                                                                <apex:inputText value="{!conObj.MailingCity}" required="true" onkeydown="return inputLimiter(event, this.value , 'NameCharacters')" onkeyup="this.value" maxlength="40" styleClass="slds-input" id="city1" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="slds-col slds-size--1-of-1 ">
+                                                                        
+                                                                        <div class="slds-form-element slds-form-element_horizontal">
+                                                                            <label class="slds-form-element__label"  >
+                                                                                State   <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                            </label>
+                                                                            <div class="slds-form-element__control">
+                                                                                <apex:inputField value="{!conObj.Mailing_State_PickList__c}" required="true"   styleClass="slds-input" id="state1" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="slds-col slds-size--1-of-1 ">
+                                                                        
+                                                                        <div class="slds-form-element slds-form-element_horizontal">
+                                                                            <label class="slds-form-element__label"  >
+                                                                                Postal / Zip Code   <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                            </label>
+                                                                            <div class="slds-form-element__control">
+                                                                                <input type="text" value="{!conObj.MailingPostalCode}" required="true"  maxlength="5"  onkeydown="return isNumber(event);" class="slds-input" id="postal1"
+                                                                                       oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);return replaceChars(event);" />
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </apex:outputPanel>
+                                                                
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Date of Birth  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <input type="text" value="{!dob}"  placeholder="mm/dd/yyyy" required="true"  maxlength="10"  class="slds-input" id="dob" onkeyup="checkDatePins(this.value)"
+                                                                               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);return replaceCharsInDOB(event);" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Passport Number <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField value="{!conObj.Passport_Number__c}" required="true" onkeydown="return inputLimiter(event, this.value , 'NameCharactersAndNumbers')" onkeyup="this.value" styleClass="slds-input" id="passportNumber" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                                                                                        
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Have you had any tickets or accidents?  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField required="true" value="{!conObj.Had_any_Tickets__c}" id="hadAnyTickets"  styleclass="slds-input"  >
+                                                                        </apex:inputField>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                            
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Gender  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField required="true" value="{!conObj.Gender__c}" id="gender" styleclass="slds-input" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Ethnicity  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField required="true" value="{!conObj.Ethnicity__c}" id="ethnicity"  styleclass="slds-input" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Marital Status  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField required="true" value="{!conObj.Marital_Status__c}"  id="maritalStatus" styleclass="slds-input" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                           
+                                                            
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Highest level of education:  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField required="true" value="{!conObj.Highest_level_of_education__c}" id="highestLevelEdu"  styleclass="slds-input" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                            
+                                                            
+                                                            
+                                                            <div style="width:100%;">
+                                                                <apex:outputPanel id="expPanel">
+                                                                    
+                                                                    <apex:actionRegion >
+                                                                        <div style="width:100%;">
+                                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                                
+                                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                                    <label class="slds-form-element__label"  >
+                                                                                        Number of years of experience riding a motorcycle  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                                    </label>
+                                                                                    <div class="slds-form-element__control">
+                                                                                        <apex:inputField required="true" value="{!conObj.Number_of_years_experience_riding_a_moto__c}"   styleclass="slds-input" id="noOfRidingExp" >
+                                                                                        </apex:inputField>
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </apex:actionRegion>
+                                                                    
+                                                                    
+                                                                    
+                                                                </apex:outputPanel>
+                                                            </div>
+                                                            
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        How did you hear about us?  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField required="true" value="{!conObj.LeadSource}"  id="leadSource"  styleclass="slds-input" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Were you referred by someone?  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField required="true" value="{!conObj.Were_you_referred_by_someone__c}" onchange="checkReferredByPanelDiv(this.value);" styleclass="slds-input" id="wereReferredBy" >
+                                                                        </apex:inputField>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div style="width:100%;">
+                                                                <div id="referredByPanelDiv" style="{!IF(conObj.Were_you_referred_by_someone__c != 'Yes', 'display:none' , '')}">  
+                                                                    <div class="slds-col slds-size--1-of-1 ">
+                                                                        
+                                                                        <div class="slds-form-element slds-form-element_horizontal">
+                                                                            <label class="slds-form-element__label"  >
+                                                                                Referred By  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                            </label>
+                                                                            <div class="slds-form-element__control">
+                                                                                <apex:inputText value="{!conObj.Referred_By__c}"  html-placeholder="" required="{!conObj.Were_you_referred_by_someone__c == 'Yes'}"
+                                                                                                id="referredBy" onkeyup="return inputLimiter(event, this.value , 'NameCharacters')" onkeydown="this.value" maxlength="80" styleClass="slds-input" />                                                                                            
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!--Sponsor Details-->
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Sponsor Name <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!conObj.Sponsor_Name__c}"  html-placeholder="" required="true"
+                                                                                        id="sponsorName" onkeyup="return inputLimiter(event, this.value , 'NameCharacters')" onkeydown="this.value" maxlength="80" styleClass="slds-input" />                                                                                            
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Sponsor Mailing Address  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!conObj.Sponsor_Street__c}" required="true" maxlength="80"  onkeyup="this.value" styleClass="slds-input" id="sponsoradd" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Sponsor Address Line 2   
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!sponsormailingLine2}" maxlength="80" onkeyup="this.value" styleClass="slds-input" id="sponsoraddLine" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        City  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!conObj.Sponsor_City__c}" required="true" maxlength="40"  onkeyup="this.value" onkeydown="return inputLimiter(event, this.value , 'NameCharacters')" styleClass="slds-input" id="sponsorcity" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        State  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField value="{!conObj.Sponsor_State__c}" required="true"  styleClass="slds-input" id="sponsorstate" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Zip Code  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField value="{!conObj.Sponsor_Zip_Code__c}" required="true" styleClass="slds-input" 
+                                                                                         id="sponsorpostal" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Arrival to Branson Date  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <input type="text" value="{!arvltoBransonDate}"  placeholder="mm/dd/yyyy" required="true"  maxlength="10"  
+                                                                               class="slds-input" id="arrToBransonDate" onkeyup="checkDatePins(this.value)" 
+                                                                               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);return replaceCharsArrivalToBransonDate(event);" />
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Departure from Branson Date  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <input type="text" value="{!depFromBransonDate}"  placeholder="mm/dd/yyyy" required="true"  maxlength="10"  
+                                                                               class="slds-input" id="depFromBransonDate" onkeyup="checkDatePins(this.value)"
+                                                                               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);return replaceCharsInDepartFromBransonDate(event);" />
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+                                                            
+                                                            <!-- Employment Information -->
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal highlightedLabel">
+                                                                    Employment Information  
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Employer Name <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!conObj.Employer__c}" onkeyup="this.value"  required="true" styleClass="slds-input" maxlength="50" id="employer" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Employer Mailing Address  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!conObj.Workplace_street_address1__c}" required="true" maxlength="80" onkeyup="this.value" styleClass="slds-input" id="addHire"  />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Employer City  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!conObj.Workplace_City__c}" required="true" maxlength="40" onkeyup="this.value" onkeydown="return inputLimiter(event, this.value , 'NameCharacters')" styleClass="slds-input" id="cityHire" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Employer State  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputField value="{!conObj.Employer_State_PickList__c}" required="true" onkeyup="this.value"   styleClass="slds-input" id="stateHire" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                    <label class="slds-form-element__label"  >
+                                                                        Employer Zip Code  <abbr title="required" class="slds-required slds-m-around_none">*</abbr> 
+                                                                    </label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <input type="text" value="{!conObj.Workplace_Postal_Code__c}" required="true" maxlength="5" class="slds-input" id="postalHire" onkeydown="return isNumber(event);"
+                                                                               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);return replaceChars(event);" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                            
+                                                            <div style="width:100%;">
+                                                                <apex:outputPanel id="discInfo">
+                                                                    <center style="">
+                                                                        
+                                                                        <apex:actionStatus id="mySaveStatus">
+                                                                            <apex:facet name="stop">
+                                                                                
+                                                                                <apex:commandButton status="mySaveStatus" 
+                                                                                                    onclick="onBeforeSubmit(event);return false;"  value="Submit" disabled="false" id="btn" styleclass="submitButton" >
+                                                                                </apex:commandButton>   
+                                                                                
+                                                                                
+                                                                            </apex:facet>
+                                                                            <apex:facet name="start">
+                                                                                <apex:outputPanel >
+                                                                                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                                                                                        &nbsp;
+                                                                                    </div>
+                                                                                    <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001;  margin-top:20%;">
+                                                                                        <apex:image value="/img/loading32.gif" style="height: 25px;"   />
+                                                                                    </div>
+                                                                                    
+                                                                                    <apex:commandButton value="Processing" style="margin-bottom: 2.5em;width: 40%; height: 55px; font-size: 18px; padding:1% 10% ; margin: 1em; background: #f3744e;color: #fff;font-size: 16px;" 
+                                                                                                        status="mySaveStatus" disabled="false"/>
+                                                                                </apex:outputPanel>
+                                                                                
+                                                                                
+                                                                            </apex:facet> 
+                                                                        </apex:actionStatus>
+                                                                        
+                                                                    </center>
+                                                                    
+                                                                    
+                                                                </apex:outputPanel>    
+                                                            </div>   
+                                                            
+                                                        </div>
+                                                        
+                                                    </div> 
+                                                    
+                                                    <div id="showErrorMessage" style="display:none;">
+                                                        <p style="margin-left:5px;font-size:18px;border:1px solid #dbc9c9;padding: 5px;"><b>We encourage you to secure a valid driver license and re-apply to the MyCityRides program!</b> </p>
+                                                        <br/>
+                                                    </div>
+                                                    
+                                                    <!--Confirmation Popup-->
+                                                    <div style="display:none;" id="divPopup" >
+                                                        <apex:outputPanel id="popUpPanel"  >
+                                                            <div id="close"></div>
+                                                            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+                                                                <div class="slds-modal__container">
+                                                                    <header class="slds-modal__header">
+                                                                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="hideDiv('divPopup');return false;">
+                                                                            X
+                                                                            <span class="slds-assistive-text">Close</span>
+                                                                        </button>
+                                                                        <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Contact Information Provided</h2>
+                                                                    </header>
+                                                                    
+                                                                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" style="">
+                                                                        
+                                                                        <div class="slds-grid slds-wrap mainPaddings" style="width:100%" >
+                                                                            
+                                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                                
+                                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                                    <label class="slds-form-element__label"  >
+                                                                                        First Name  
+                                                                                    </label>
+                                                                                    <div class="slds-form-element__control">
+                                                                                        {!conObj.firstname}
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                                
+                                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                                    <label class="slds-form-element__label"  >
+                                                                                        Last Name  
+                                                                                    </label>
+                                                                                    <div class="slds-form-element__control">
+                                                                                        {!conObj.lastname}
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                                
+                                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                                    <label class="slds-form-element__label"  >
+                                                                                        Phone  
+                                                                                    </label>
+                                                                                    <div class="slds-form-element__control">
+                                                                                        {!ph1}-{!ph2}-{!ph3}
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                                
+                                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                                    <label class="slds-form-element__label"  >
+                                                                                        Email  
+                                                                                    </label>
+                                                                                    <div class="slds-form-element__control">
+                                                                                        {!conObj.email}
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                                
+                                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                                    <label class="slds-form-element__label"  >
+                                                                                        Date of Birth  
+                                                                                    </label>
+                                                                                    <div class="slds-form-element__control">
+                                                                                        <apex:outputText value="{!dob}">  </apex:outputText>
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                                
+                                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                                    <label class="slds-form-element__label"  >
+                                                                                        Passport Number  
+                                                                                    </label>
+                                                                                    <div class="slds-form-element__control">
+                                                                                        <apex:outputText value="{!conObj.Passport_Number__c}">  </apex:outputText>
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                                
+                                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                                    <label class="slds-form-element__label"  >
+                                                                                        Driving License Number  
+                                                                                    </label>
+                                                                                    <div class="slds-form-element__control">
+                                                                                        {!conObj.Drivers_License_Number_with_state__c}
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <div class="slds-col slds-size--1-of-1 ">
+                                                                                
+                                                                                <div class="slds-form-element slds-form-element_horizontal">
+                                                                                    <label class="slds-form-element__label"  >
+                                                                                        Current Address  
+                                                                                    </label>
+                                                                                    <div class="slds-form-element__control">
+                                                                                        {!conObj.Home_Country_Street_JI__c} <p style="{!IF(otherLine2 != null,' ','display:none;')}"> {!otherLine2}</p>
+                                                                                        {!conObj.Home_Country_City_J1__c} &nbsp; {!conObj.Home_Country_State_J1__c}<br/>
+                                                                                        {!conObj.Home_Country_Zip_Code_J1__c}<br/>
+                                                                                        {!conObj.Country_Code__c}
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                        <br/>
+                                                                        
+                                                                        <footer class="slds-modal__footer confirmation" style="text-align:center;display:block !important;">
+                                                                            <apex:outputPanel id="buttons">
+                                                                                <apex:actionStatus id="submitStatus">
+                                                                                    <apex:facet name="stop">
+                                                                                        <apex:commandButton action="{!submit}" value="Submit" id="btnSubmit"
+                                                                                                            status="submitStatus"  ReRender="errorPanel,finalPanel,mainPanel,containerPanel" styleclass="submitButton btn btn-warning" >
+                                                                                        </apex:commandButton>   
+                                                                                        
+                                                                                    </apex:facet>
+                                                                                    
+                                                                                    <apex:facet name="start">
+                                                                                        <apex:outputPanel >
+                                                                                            <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                                                                                                &nbsp;
+                                                                                            </div>
+                                                                                            <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001;  margin-top:40%;">
+                                                                                                <apex:image value="/img/loading32.gif" style="height: 25px;"   />
+                                                                                            </div>
+                                                                                            <apex:commandButton value="Submit" styleClass="submitButton" 
+                                                                                                                status="submitStatus" disabled="false"/>
+                                                                                        </apex:outputPanel>
+                                                                                    </apex:facet>
+                                                                                </apex:actionStatus>    
+                                                                                <apex:commandButton value="Cancel" action="{!closePopup}" styleclass="submitButton btn btn-warning"  onclick="hideDiv('divPopup');return false;" />
+                                                                            </apex:outputPanel>
+                                                                        </footer>
+                                                                    </div>
+                                                                </div>
+                                                            </section>
+                                                            <div class="slds-backdrop slds-backdrop_open"></div>
+                                                        </apex:outputPanel>
+                                                    </div>
+                                                    
+                                                    <apex:outputPanel layout="block" id="popUpRenderingPanel"  rendered="{!displayPopUp}">
+                                                        <script>
+                                                        var displayPopUp= '{!displayPopUp}';
+                                                        if(displayPopUp=='true'){
+                                                            $("div[id$=divPopup]").removeClass('slds-hide');
+                                                        }
+                                                        </script>
+                                                    </apex:outputPanel>
+                                                    
+                                                    
+                                                </apex:outputPanel>
+                                                
+                                                <div id="divLoading" class="slds-hide">
+                                                    <div class="demo-only demo-only demo-only_viewport demo--inverse" style="height:6rem">
+                                                        <div class="slds-spinner_container slds-is-fixed">
+                                                            <div role="status" class="slds-spinner slds-spinner_medium">
+                                                                <span class="slds-assistive-text">Loading</span>
+                                                                <div class="slds-spinner__dot-a"></div>
+                                                                <div class="slds-spinner__dot-b"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                            </apex:form>
+                                            
+                                        </apex:outputPanel>
+                                        
+                                        <apex:outputPanel id="finalPanel" rendered="{!contactCreated}">
+                                            <br/><br/> 
+                                            <p style="margin-left:5%;font-size:18px;"><i>Congratulations!<br/>
+                                                You've taken the first step toward becoming a MyCityRides' Flyer.<br/>
+                                                We're reviewing your application and will be in touch shortly to let you know the next steps.<br/>
+                                                Be watching your email for your approval and Scooter School Sign-up information.</i> </p>
+                                            <br/><br/>
+                                            
+                                            <div style="margin-left:5%;">
+                                                <p style="font-size:18px;color: #f76f3cf2">
+                                                    
+                                                    Expedite your application.<apex:outputLink style="font-size:20px;color: #f76f3cf2 !important;font-weight:bold;" value="{!fileUploadURL}/s/?{!conObj.Id}" id="theLink"> CLICK HERE</apex:outputLink>
+                                                    to securely submit your proof of income.
+                                                </p>
+                                                
+                                            </div>
+                                            <br/><br/>
+                                            <!-- comment's -->
+                                        </apex:outputPanel>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                    </apex:outputPanel>
+                </section>
+            </div>
+            <!-- </div> -->
+        </body>
+    </html>
+</apex:page>

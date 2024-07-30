@@ -1,0 +1,3 @@
+<apex:page standardController="Scooter__c" extensions="GPSvehichle_SFIntegrationCtrl" action="{!fetchFeedForScooter}">
+ 
+</apex:page>
